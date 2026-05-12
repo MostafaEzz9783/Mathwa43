@@ -1,0 +1,2246 @@
+﻿<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ù…Ø«ÙˆÙ‰ | Executive Negotiation Dashboard</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700;900&family=Playfair+Display:ital,wght@1,700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --espresso: #0F0A06;
+      --card-bg: #1A1208;
+      --card-elevated: #2D1E10;
+      --gold: #C9A96E;
+      --gold-light: #E8D4A8;
+      --gold-dim: #6B5430;
+      --gold-soft: rgba(201,169,110,0.12);
+      --text-primary: #F5EDE0;
+      --text-muted: rgba(245,237,224,0.5);
+      --success: #95D5B2;
+      --warning: #FFD166;
+      --danger: #FCA5A5;
+      --danger-bg: rgba(252,165,165,0.08);
+      --hero-radial-1: rgba(201,169,110,0.22);
+      --hero-radial-2: rgba(201,169,110,0.08);
+      --surface-line: rgba(201,169,110,0.14);
+      --surface-line-strong: rgba(201,169,110,0.32);
+      --shadow-deep: rgba(0,0,0,0.34);
+      --white-soft: rgba(255,255,255,0.05);
+      --mask-fade: rgba(0,0,0,0.7);
+      --toggle-bg: rgba(26,18,8,0.88);
+      --gold-wash-10: rgba(201,169,110,0.1);
+      --gold-wash-06: rgba(201,169,110,0.06);
+      --gold-wash-04: rgba(201,169,110,0.04);
+      --gold-wash-03: rgba(201,169,110,0.03);
+      --gold-wash-025: rgba(201,169,110,0.025);
+      --gold-border-soft: rgba(201,169,110,0.15);
+      --text-surface-08: rgba(245,237,224,0.08);
+      --text-surface-06: rgba(245,237,224,0.06);
+      --danger-wash-72: rgba(252,165,165,0.72);
+      --danger-wash-70: rgba(252,165,165,0.7);
+      --danger-border-soft: rgba(252,165,165,0.2);
+      --danger-border-mid: rgba(252,165,165,0.15);
+      --danger-border-faint: rgba(252,165,165,0.12);
+      --danger-border-strong: rgba(252,165,165,0.25);
+      --danger-bg-soft: rgba(252,165,165,0.05);
+      --danger-bg-faint: rgba(252,165,165,0.04);
+      --warning-bg-soft: rgba(255,209,102,0.08);
+      --warning-bg-mid: rgba(255,209,102,0.09);
+      --warning-border-soft: rgba(255,209,102,0.24);
+      --warning-border-mid: rgba(255,209,102,0.25);
+      --print-bg: #FFFFFF;
+      --print-text: #18120F;
+      --print-muted: rgba(24,18,15,0.65);
+      --print-line: rgba(24,18,15,0.16);
+      --print-line-strong: rgba(24,18,15,0.3);
+      --print-grid: rgba(24,18,15,0.04);
+      --branch-a: #C9A96E;
+      --branch-b: #FFD166;
+      --grid-accent: rgba(201,169,110,0.06);
+      --chart-indirect: rgba(232,212,168,0.22);
+      --danger-solid-soft: rgba(252,165,165,0.22);
+      --lux-ease: cubic-bezier(0.22, 1, 0.36, 1);
+      --font-body: "Tajawal", sans-serif;
+      --font-display: "Playfair Display", serif;
+      --font-mono: "JetBrains Mono", monospace;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      font-family: var(--font-body);
+      color: var(--text-primary);
+      overflow-x: hidden;
+      background:
+        radial-gradient(circle at top center, var(--hero-radial-1), transparent 34%),
+        radial-gradient(circle at 15% 20%, var(--hero-radial-2), transparent 24%),
+        linear-gradient(180deg, var(--espresso), var(--card-bg));
+      line-height: 1.65;
+      transition:
+        background 500ms var(--lux-ease),
+        color 500ms var(--lux-ease);
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      background-image:
+        linear-gradient(var(--grid-accent) 1px, transparent 1px),
+        linear-gradient(90deg, var(--grid-accent) 1px, transparent 1px);
+      background-size: 120px 120px;
+      mask-image: linear-gradient(180deg, var(--mask-fade), transparent 92%);
+      opacity: 0.5;
+    }
+
+    button,
+    a,
+    canvas,
+    .metric-card,
+    .gauge-card,
+    .insight-card,
+    .summary-tile {
+      transition:
+        color 320ms var(--lux-ease),
+        background-color 320ms var(--lux-ease),
+        border-color 320ms var(--lux-ease),
+        transform 320ms var(--lux-ease),
+        opacity 320ms var(--lux-ease),
+        box-shadow 320ms var(--lux-ease);
+    }
+
+    .lang-toggle {
+      position: fixed;
+      inset-block-start: 1.5rem;
+      inset-inline-end: 1.5rem;
+      z-index: 20;
+      border: 1px solid var(--surface-line-strong);
+      background: var(--toggle-bg);
+      color: var(--gold-light);
+      border-radius: 999px;
+      font-family: var(--font-mono);
+      font-size: 0.9rem;
+      padding: 0.72rem 1rem;
+      letter-spacing: 0.08em;
+      cursor: pointer;
+      box-shadow: 0 18px 50px var(--shadow-deep);
+    }
+
+    .lang-toggle:hover {
+      transform: translateY(-2px);
+      border-color: var(--gold);
+    }
+
+    .page {
+      position: relative;
+      width: min(1400px, calc(100% - 2rem));
+      margin: 0 auto;
+      padding: 3rem 0 2rem;
+    }
+
+    .hero {
+      padding-top: 0.35rem;
+    }
+
+    .hero-grid,
+    .gap-grid,
+    .cost-grid,
+    .charts-grid,
+    .insights-grid,
+    .footer-grid {
+      display: grid;
+      gap: 1.1rem;
+    }
+
+    .hero-grid {
+      grid-template-columns: minmax(0, 1.25fr) minmax(340px, 0.75fr);
+      align-items: start;
+    }
+
+    .hero-grid > *,
+    .gap-grid > *,
+    .cost-grid > *,
+    .charts-grid > *,
+    .insights-grid > *,
+    .footer-grid > * {
+      min-width: 0;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.65rem;
+      padding: 0.55rem 1rem;
+      border-radius: 999px;
+      color: var(--gold-light);
+      background: var(--gold-soft);
+      border: 1px solid var(--surface-line);
+      font-size: 0.92rem;
+      font-weight: 500;
+      letter-spacing: 0.02em;
+    }
+
+    .hero-title {
+      margin: 1.25rem 0 0.5rem;
+      font-size: clamp(2.6rem, 5vw, 4.7rem);
+      line-height: 1.05;
+      font-weight: 900;
+    }
+
+    [dir="ltr"] .hero-title,
+    [dir="ltr"] .section-title {
+      font-family: var(--font-display);
+      font-style: italic;
+      font-weight: 700;
+      letter-spacing: 0.01em;
+    }
+
+    .hero-subtitle {
+      margin: 0 0 1.2rem;
+      color: var(--gold-light);
+      font-family: var(--font-display);
+      font-style: italic;
+      font-size: clamp(1.2rem, 2vw, 1.7rem);
+    }
+
+    .hero-body {
+      max-width: 64ch;
+      margin: 0;
+      color: var(--text-muted);
+      font-size: 1.08rem;
+    }
+
+    .alert-banner {
+      margin-top: 1.6rem;
+      border: 1px solid var(--danger);
+      background: var(--danger-bg);
+      border-radius: 1rem;
+      padding: 1rem 1.5rem;
+      display: grid;
+      grid-template-columns: auto 1fr;
+      gap: 1rem;
+      align-items: start;
+    }
+
+    .alert-icon {
+      font-size: 1.4rem;
+      line-height: 1;
+      color: var(--danger);
+    }
+
+    .alert-text {
+      display: grid;
+      gap: 0.3rem;
+    }
+
+    .alert-primary {
+      color: var(--text-primary);
+      font-size: 1rem;
+      font-weight: 700;
+    }
+
+    .alert-secondary {
+      color: var(--danger);
+      font-size: 0.97rem;
+    }
+
+    .summary-card .card-core {
+      padding: 1.7rem;
+      background:
+        radial-gradient(circle at top, var(--gold-wash-10), transparent 60%),
+        var(--card-bg);
+    }
+
+    .summary-caption {
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      font-size: 0.72rem;
+      margin-bottom: 0.75rem;
+    }
+
+    .summary-value {
+      font-family: var(--font-mono);
+      font-size: clamp(2.2rem, 4vw, 3rem);
+      color: var(--danger);
+      font-weight: 600;
+      line-height: 1;
+      margin-bottom: 0.75rem;
+    }
+
+    .summary-body {
+      color: var(--text-muted);
+      margin: 0 0 1.35rem;
+    }
+
+    .summary-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 0.9rem;
+    }
+
+    .summary-tile {
+      padding: 0.95rem 1rem;
+      border-radius: 1.2rem;
+      background: var(--gold-wash-04);
+      border: 1px solid var(--surface-line);
+    }
+
+    .summary-label {
+      display: block;
+      color: var(--text-muted);
+      font-size: 0.78rem;
+      margin-bottom: 0.35rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .summary-number {
+      font-family: var(--font-mono);
+      font-size: 1rem;
+      color: var(--gold-light);
+    }
+
+    .page > section + section {
+      margin-top: 2rem;
+    }
+
+    .section-header {
+      margin-bottom: 0.9rem;
+      display: flex;
+      align-items: end;
+      justify-content: space-between;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+
+    .section-title {
+      margin: 0;
+      font-size: clamp(1.8rem, 3vw, 2.8rem);
+      line-height: 1.1;
+    }
+
+    .section-subtitle {
+      margin: 0.35rem 0 0;
+      color: var(--gold-light);
+      font-family: var(--font-display);
+      font-style: italic;
+      font-size: 1.02rem;
+    }
+
+    .section-note {
+      color: var(--text-muted);
+      max-width: 32ch;
+      font-size: 0.95rem;
+      text-align: end;
+    }
+
+    .card-shell {
+      background: var(--gold-wash-06);
+      border: 0.5px solid var(--gold-border-soft);
+      border-radius: 2rem;
+      padding: 6px;
+      box-shadow: 0 18px 70px var(--shadow-deep);
+    }
+
+    .card-core {
+      background: var(--card-bg);
+      border-radius: calc(2rem - 6px);
+      padding: 2rem;
+      box-shadow: inset 0 1px 1px var(--white-soft);
+      height: 100%;
+    }
+
+    .gap-grid,
+    .cost-grid,
+    .charts-grid,
+    .footer-grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .single-branch-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .gauge-card .card-core {
+      display: grid;
+      gap: 1.25rem;
+      background:
+        linear-gradient(180deg, var(--gold-wash-06), transparent 22%),
+        var(--card-bg);
+    }
+
+    .branch-header {
+      display: flex;
+      align-items: start;
+      justify-content: space-between;
+      gap: 1rem;
+      border-bottom: 1px solid var(--surface-line);
+      padding-bottom: 1rem;
+    }
+
+    .branch-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.55rem;
+      color: var(--gold-light);
+      font-size: 0.8rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+
+    .branch-dot {
+      width: 0.7rem;
+      height: 0.7rem;
+      border-radius: 999px;
+      background: var(--branch-color);
+      box-shadow: 0 0 0 4px var(--gold-wash-10);
+    }
+
+    .branch-name {
+      margin: 0.45rem 0 0;
+      font-size: 1.5rem;
+      font-weight: 800;
+    }
+
+    .branch-meta {
+      color: var(--text-muted);
+      font-size: 0.92rem;
+      text-align: end;
+    }
+
+    .gauge-summary {
+      display: grid;
+      gap: 1rem;
+    }
+
+    .gauge-row {
+      display: grid;
+      gap: 0.7rem;
+    }
+
+    .gauge-topline {
+      display: flex;
+      justify-content: space-between;
+      gap: 1rem;
+      align-items: baseline;
+    }
+
+    .gauge-label {
+      color: var(--text-muted);
+      font-size: 0.92rem;
+    }
+
+    .gauge-percent {
+      font-family: var(--font-mono);
+      font-size: clamp(1.65rem, 3vw, 2.4rem);
+      font-weight: 600;
+    }
+
+    .gauge-percent.gold {
+      color: var(--gold-light);
+    }
+
+    .gauge-percent.danger {
+      color: var(--danger);
+    }
+
+    .bar-track {
+      height: 1.05rem;
+      border-radius: 999px;
+      overflow: hidden;
+      background: var(--text-surface-08);
+      border: 1px solid var(--text-surface-06);
+      position: relative;
+    }
+
+    .bar-fill {
+      height: 100%;
+      width: 100%;
+      transform: scaleX(0);
+      transition: transform 1000ms var(--lux-ease);
+      border-radius: inherit;
+    }
+
+    [dir="rtl"] .bar-fill {
+      transform-origin: right center;
+    }
+
+    [dir="ltr"] .bar-fill {
+      transform-origin: left center;
+    }
+
+    .bar-fill.gold {
+      background: linear-gradient(90deg, var(--gold-dim), var(--gold));
+    }
+
+    .bar-fill.danger {
+      background: linear-gradient(90deg, var(--danger-wash-72), var(--danger));
+    }
+
+    .is-visible .bar-fill {
+      transform: scaleX(var(--target-scale));
+    }
+
+    .gap-loss {
+      padding: 1.15rem 1.25rem;
+      border-radius: 1.4rem;
+      background: var(--danger-bg);
+      border: 1px solid var(--danger-border-soft);
+    }
+
+    .loss-label {
+      color: var(--text-muted);
+      font-size: 0.85rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+
+    .loss-value {
+      margin-top: 0.45rem;
+      font-family: var(--font-mono);
+      font-size: clamp(1.85rem, 3vw, 2.7rem);
+      color: var(--danger);
+      font-weight: 600;
+      line-height: 1;
+    }
+
+    .loss-caption {
+      margin-top: 0.35rem;
+      color: var(--danger);
+      font-size: 0.95rem;
+    }
+
+    .kpi-strip {
+      display: grid;
+      gap: 1rem;
+      min-width: 0;
+    }
+
+    .kpi-row {
+      position: relative;
+      min-width: 0;
+      max-width: 100%;
+    }
+
+    .kpi-row::before {
+      content: "";
+      position: absolute;
+      inset-inline-start: 0;
+      inset-inline-end: 0;
+      inset-block-start: 0;
+      height: 2px;
+      background: linear-gradient(90deg, transparent, var(--branch-color), transparent);
+    }
+
+    .kpi-card-shell .card-core {
+      padding: 1.2rem 1.15rem;
+    }
+
+    .kpi-row-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      padding: 0.75rem 0 0.3rem;
+    }
+
+    .kpi-row-title {
+      font-weight: 800;
+      font-size: 1.25rem;
+    }
+
+    .kpi-row-subtitle {
+      color: var(--text-muted);
+      font-size: 0.9rem;
+    }
+
+    .kpi-scroll {
+      display: grid;
+      grid-template-columns: repeat(6, minmax(180px, 1fr));
+      gap: 1rem;
+      scroll-snap-type: x proximity;
+    }
+
+    .metric-card {
+      height: 100%;
+      scroll-snap-align: start;
+    }
+
+    .metric-label {
+      color: var(--text-muted);
+      font-size: 0.82rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      min-height: 2.05em;
+    }
+
+    .metric-value {
+      margin-top: 0.75rem;
+      font-family: var(--font-mono);
+      font-size: 1.32rem;
+      font-weight: 600;
+      line-height: 1.15;
+    }
+
+    .metric-foot {
+      margin-top: 0.55rem;
+      color: var(--text-muted);
+      font-size: 0.82rem;
+    }
+
+    .metric-loss .card-core {
+      background:
+        linear-gradient(180deg, var(--danger-bg-faint), transparent 45%),
+        var(--card-bg);
+      border: 1px solid var(--danger-border-faint);
+    }
+
+    .metric-loss .metric-value,
+    .metric-loss .metric-foot {
+      color: var(--danger);
+    }
+
+    .comparison-card .card-core,
+    .chart-card .card-core,
+    .cost-card .card-core,
+    .insight-card .card-core {
+      display: grid;
+      gap: 1.2rem;
+    }
+
+    .table-wrap {
+      overflow-x: auto;
+      border-radius: 1.4rem;
+      border: 1px solid var(--surface-line);
+      -webkit-overflow-scrolling: touch;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      min-width: 1120px;
+    }
+
+    th,
+    td {
+      padding: 1rem 0.95rem;
+      border-bottom: 1px solid var(--surface-line);
+      text-align: start;
+      vertical-align: top;
+    }
+
+    thead th {
+      background: var(--surface-line);
+      color: var(--gold-light);
+      font-weight: 700;
+      font-size: 0.9rem;
+      white-space: nowrap;
+    }
+
+    tbody tr:last-child td {
+      border-bottom: 0;
+    }
+
+    tbody td {
+      color: var(--text-primary);
+      font-size: 0.95rem;
+    }
+
+    .mono {
+      font-family: var(--font-mono);
+      white-space: nowrap;
+    }
+
+    .muted {
+      color: var(--text-muted);
+    }
+
+    .branch-badge,
+    .status-badge,
+    .arrow-badge {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.4rem;
+      border-radius: 999px;
+      padding: 0.38rem 0.72rem;
+      font-size: 0.82rem;
+      font-weight: 700;
+      line-height: 1;
+      white-space: nowrap;
+      border: 1px solid transparent;
+    }
+
+    .branch-badge {
+      background: var(--gold-wash-10);
+      color: var(--gold-light);
+      border-color: var(--surface-line);
+    }
+
+    .status-badge.danger,
+    .arrow-badge.danger {
+      color: var(--danger);
+      background: var(--danger-bg);
+      border-color: var(--danger-border-strong);
+    }
+
+    .status-badge.warning,
+    .arrow-badge.warning {
+      color: var(--warning);
+      background: var(--warning-bg-soft);
+      border-color: var(--warning-border-soft);
+    }
+
+    .chart-stage {
+      display: grid;
+      gap: 1rem;
+      min-height: 300px;
+    }
+
+    .chart-stage canvas {
+      width: 100%;
+      height: 100%;
+      min-height: 250px;
+    }
+
+    .chart-note,
+    .chart-fallback {
+      color: var(--text-muted);
+      font-size: 0.9rem;
+    }
+
+    .chart-fallback[hidden] {
+      display: none;
+    }
+
+    .subtable {
+      border: 1px solid var(--surface-line);
+      border-radius: 1.4rem;
+      overflow: hidden;
+      background: var(--gold-wash-025);
+    }
+
+    .subtable-head {
+      padding: 0.9rem 1rem;
+      border-bottom: 1px solid var(--surface-line);
+      color: var(--gold-light);
+      font-weight: 700;
+    }
+
+    .subtable table {
+      min-width: 100%;
+    }
+
+    .subtable td,
+    .subtable th {
+      padding: 0.82rem 1rem;
+    }
+
+    .subtable tr.total-row td {
+      border-top: 1px solid var(--gold-dim);
+      font-weight: 700;
+      color: var(--gold-light);
+    }
+
+    .cost-bridge {
+      display: grid;
+      gap: 0.65rem;
+      padding: 1rem 1.1rem;
+      border-radius: 1.3rem;
+      background: var(--danger-bg-soft);
+      border: 1px solid var(--danger-border-mid);
+    }
+
+    .cost-bridge-head {
+      display: flex;
+      justify-content: space-between;
+      gap: 1rem;
+      font-size: 0.9rem;
+      color: var(--text-muted);
+    }
+
+    .bridge-track {
+      position: relative;
+      height: 1.15rem;
+      border-radius: 999px;
+      background: var(--text-surface-08);
+      overflow: hidden;
+      border: 1px solid var(--text-surface-06);
+    }
+
+    .bridge-commission,
+    .bridge-gap {
+      position: absolute;
+      inset-block: 0;
+      transform: scaleX(0);
+      transition: transform 1100ms var(--lux-ease);
+    }
+
+    .bridge-commission {
+      inset-inline-start: 0;
+      background: linear-gradient(90deg, var(--gold-dim), var(--gold));
+    }
+
+    .bridge-gap {
+      background: linear-gradient(90deg, var(--danger-wash-70), var(--danger));
+    }
+
+    [dir="rtl"] .bridge-commission,
+    [dir="rtl"] .bridge-gap {
+      transform-origin: right center;
+    }
+
+    [dir="ltr"] .bridge-commission,
+    [dir="ltr"] .bridge-gap {
+      transform-origin: left center;
+    }
+
+    .is-visible .bridge-commission {
+      transform: scaleX(var(--commission-scale));
+    }
+
+    .is-visible .bridge-gap {
+      transform: scaleX(var(--gap-scale));
+    }
+
+    .bridge-foot {
+      display: flex;
+      justify-content: space-between;
+      gap: 1rem;
+      color: var(--danger);
+      font-size: 0.88rem;
+    }
+
+    .insights-grid {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+
+    .insight-card .card-core {
+      background:
+        linear-gradient(180deg, var(--gold-wash-06), transparent 40%),
+        var(--card-bg);
+    }
+
+    .card-badge-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+    }
+
+    .card-badge {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0.4rem 0.75rem;
+      border-radius: 999px;
+      font-size: 0.8rem;
+      font-weight: 800;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      border: 1px solid transparent;
+    }
+
+    .card-badge.danger {
+      color: var(--danger);
+      background: var(--danger-bg);
+      border-color: var(--danger-border-strong);
+    }
+
+    .card-badge.warning {
+      color: var(--warning);
+      background: var(--warning-bg-mid);
+      border-color: var(--warning-border-mid);
+    }
+
+    .card-badge.gold {
+      color: var(--gold-light);
+      background: var(--gold-wash-10);
+      border-color: var(--surface-line);
+    }
+
+    .insight-title {
+      margin: 0;
+      font-size: 1.45rem;
+      line-height: 1.2;
+    }
+
+    .insight-body {
+      margin: 0;
+      color: var(--text-muted);
+      font-size: 1rem;
+    }
+
+    .footer-card .card-core {
+      padding: 1.4rem 1.6rem;
+    }
+
+    .footer-brand {
+      font-size: 1.5rem;
+      font-weight: 900;
+      color: var(--gold-light);
+    }
+
+    .footer-meta {
+      color: var(--text-muted);
+      font-size: 0.98rem;
+    }
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(40px);
+      transition:
+        opacity 800ms var(--lux-ease),
+        transform 800ms var(--lux-ease);
+    }
+
+    .reveal.is-visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .stagger-grid > :nth-child(2) {
+      transition-delay: 120ms;
+    }
+
+    .stagger-grid > :nth-child(3) {
+      transition-delay: 240ms;
+    }
+
+    .stagger-grid > :nth-child(4) {
+      transition-delay: 360ms;
+    }
+
+    .screen-only {
+      display: block;
+    }
+
+    .print-only {
+      display: none;
+    }
+
+    @media (max-width: 1024px) {
+      .hero-grid,
+      .gap-grid,
+      .cost-grid,
+      .charts-grid,
+      .insights-grid,
+      .footer-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .section-note {
+        text-align: start;
+        max-width: none;
+      }
+    }
+
+    @media (max-width: 767px) {
+      .page {
+        width: min(100% - 0.75rem, 100%);
+        padding: 3.85rem 0 1.25rem;
+      }
+
+      .lang-toggle {
+        inset-inline-end: 0.75rem;
+        inset-block-start: 0.75rem;
+        padding: 0.62rem 0.9rem;
+        font-size: 0.82rem;
+      }
+
+      .card-core {
+        padding: 1.35rem;
+      }
+
+      .eyebrow {
+        padding: 0.48rem 0.82rem;
+        font-size: 0.81rem;
+      }
+
+      .hero-title {
+        font-size: clamp(2.15rem, 10vw, 3rem);
+      }
+
+      .hero-subtitle {
+        font-size: 1.03rem;
+      }
+
+      .hero-body {
+        font-size: 0.97rem;
+      }
+
+      .alert-banner {
+        grid-template-columns: 1fr;
+        gap: 0.65rem;
+        padding: 0.9rem 1rem;
+      }
+
+      .summary-value {
+        font-size: clamp(1.95rem, 9vw, 2.45rem);
+      }
+
+      .branch-name {
+        font-size: 1.18rem;
+      }
+
+      .gauge-percent {
+        font-size: 1.55rem;
+      }
+
+      .loss-value {
+        font-size: 1.8rem;
+      }
+
+      .summary-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .kpi-scroll {
+        grid-template-columns: none;
+        grid-auto-flow: column;
+        grid-auto-columns: minmax(200px, 78vw);
+        overflow-x: auto;
+        max-width: 100%;
+        padding-bottom: 0.35rem;
+        padding-inline-end: 0.2rem;
+        scrollbar-width: thin;
+        -webkit-overflow-scrolling: touch;
+        gap: 0.85rem;
+      }
+
+      .metric-value {
+        font-size: 1.18rem;
+      }
+
+      .table-wrap {
+        margin-inline: -0.15rem;
+        border-radius: 1.1rem;
+      }
+
+      th,
+      td {
+        padding: 0.8rem 0.72rem;
+      }
+
+      table {
+        min-width: 940px;
+      }
+
+      .chart-stage {
+        min-height: 240px;
+      }
+
+      .chart-stage canvas {
+        min-height: 210px;
+      }
+
+      .subtable-head {
+        padding: 0.8rem 0.9rem;
+      }
+
+      .subtable td,
+      .subtable th {
+        padding: 0.72rem 0.85rem;
+      }
+
+      .footer-meta {
+        font-size: 0.9rem;
+      }
+
+      .section-header,
+      .branch-header,
+      .gauge-topline,
+      .kpi-row-head,
+      .cost-bridge-head,
+      .bridge-foot,
+      .card-badge-row {
+        flex-direction: column;
+        align-items: start;
+      }
+
+      .branch-meta {
+        text-align: start;
+      }
+    }
+
+    @media print {
+      :root {
+        --espresso: var(--print-bg);
+        --card-bg: var(--print-bg);
+        --text-primary: var(--print-text);
+        --text-muted: var(--print-muted);
+        --surface-line: var(--print-line);
+        --surface-line-strong: var(--print-line-strong);
+        --white-soft: rgba(0,0,0,0);
+        --shadow-deep: rgba(0,0,0,0);
+        --hero-radial-1: rgba(0,0,0,0);
+        --hero-radial-2: rgba(0,0,0,0);
+        --grid-accent: var(--print-grid);
+      }
+
+      body {
+        background: var(--print-bg);
+        color: var(--print-text);
+      }
+
+      body::before,
+      .lang-toggle,
+      .screen-only {
+        display: none !important;
+      }
+
+      .print-only {
+        display: block;
+      }
+
+      .page {
+        width: 100%;
+        padding: 0;
+      }
+
+      .card-shell {
+        box-shadow: none;
+      }
+
+      .reveal {
+        opacity: 1 !important;
+        transform: none !important;
+      }
+
+      .chart-card canvas,
+      .chart-fallback,
+      .chart-note {
+        display: none !important;
+      }
+
+      .hero-grid,
+      .gap-grid,
+      .cost-grid,
+      .charts-grid,
+      .insights-grid,
+      .footer-grid {
+        grid-template-columns: 1fr;
+      }
+
+      table,
+      .subtable table {
+        min-width: 100%;
+      }
+    }
+  </style>
+</head>
+<body>
+  <button class="lang-toggle" id="langToggle" type="button" aria-label="Toggle language">EN</button>
+  <main id="app"></main>
+
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+  <script>
+    const DATA = {
+      branches: [
+        {
+          id: "alTaawnBuilding",
+          shortCode: "43",
+          branchColorVar: "--branch-a",
+          name: { ar: "Ù…Ø¨Ù†Ù‰ Ø§Ù„ØªØ¹Ø§ÙˆÙ†", en: "AL TAAWN BUILDING" },
+          owner: { ar: "Ù…Ø«ÙˆÙ‰ 43", en: "Mathwa 43" },
+          building: "AL TAAWN BUILDING",
+          period: "10.5 months + Expected Q2 2026",
+          actualRevenue: 1294857,
+          expectedRevenue: 500000,
+          totalRevenue: 1794857,
+          actualDeductions: 48404,
+          expectedDeductions: 15000,
+          totalDeductions: 63404,
+          actualNetRevenue: 1246453,
+          expectedNetRevenue: 485000,
+          netRevenue: 1731453,
+          commissionRate: 0.07,
+          commissionActual: 87252,
+          commissionExpected: 33950,
+          commissionTotal: 121202,
+          directCosts: {
+            payroll: 39600,
+            supplies: 6000,
+            maintenance: 18000,
+            laundry: 12000,
+            supervisor: 18000,
+            carRent: 24000,
+            subtotal: 117600
+          },
+          indirectCosts: {
+            marketing: 24000,
+            reservationSystem: 6000,
+            management: 120000,
+            subtotal: 150000
+          },
+          totalCosts: 267600,
+          costPct: 0.15,
+          commissionPct: 0.07,
+          netMargin: -0.08
+        }
+      ],
+      headline: {
+        totalRevenue: 1794857,
+        totalDeductions: 63404,
+        netRevenue: 1731453,
+        totalCommission: 121202,
+        totalCosts: 267600,
+        operationalGap: -146398
+      }
+    };
+
+    DATA.copy = {
+      ar: {
+        dir: "rtl",
+        lang: "ar",
+        toggle: "EN",
+        hero: {
+          eyebrow: "Ù…Ø«ÙˆÙ‰ â€” ØªÙ‚Ø±ÙŠØ± ØªÙ†ÙÙŠØ°ÙŠ Â· Ù…Ø¨Ù†Ù‰ Ø§Ù„ØªØ¹Ø§ÙˆÙ† Â· Ù…Ø§ÙŠÙˆ 2026",
+          title: "Ø§Ù„Ù†Ù…ÙˆØ°Ø¬ Ø§Ù„Ù…Ø§Ù„ÙŠ Ø§Ù„ØªØ´ØºÙŠÙ„ÙŠ Ù„Ù…Ø¨Ù†Ù‰ Ø§Ù„ØªØ¹Ø§ÙˆÙ†",
+          subtitle: "AL TAAWN BUILDING Operational Financial Model",
+          body: "ÙŠØ¹Ø±Ø¶ Ù‡Ø°Ø§ Ø§Ù„ØªÙ‚Ø±ÙŠØ± Ø¥ÙŠØ±Ø§Ø¯Ø§Øª ÙØªØ±Ø© Ø§Ù„ØªØ´ØºÙŠÙ„ Ø§Ù„Ø¨Ø§Ù„ØºØ© 10.5 Ø£Ø´Ù‡Ø±ØŒ ÙˆØ§Ù„Ø¥ÙŠØ±Ø§Ø¯ Ø§Ù„Ù…ØªÙˆÙ‚Ø¹ Ù…Ù† Ø§Ù„Ø±Ø¨Ø¹ Ø§Ù„Ø«Ø§Ù†ÙŠ 2026ØŒ ÙˆØ§Ù„Ø§Ø³ØªÙ‚Ø·Ø§Ø¹Ø§Øª Ù‚Ø¨Ù„ ØµØ§ÙÙŠ Ø§Ù„Ø¥ÙŠØ±Ø§Ø¯ØŒ ÙˆØ­ØµØ© Ù…Ø«ÙˆÙ‰ ÙˆÙÙ‚ Ù†Ù…ÙˆØ°Ø¬ 7%ØŒ ÙˆÙ‡ÙŠÙƒÙ„ Ø§Ù„Ù…ØµØ±ÙˆÙØ§Øª Ø§Ù„ØªØ´ØºÙŠÙ„ÙŠØ© Ø§Ù„Ø³Ù†ÙˆÙŠØ© Ù„Ù„Ù…Ø´Ø±ÙˆØ¹."
+        },
+        alert: {
+          ar: "Ø­ØµØ© Ù…Ø«ÙˆÙ‰ ÙˆÙÙ‚ Ù†Ù…ÙˆØ°Ø¬ 7% ØªØ¨Ù„Øº 121,202 Ø±ÙŠØ§Ù„ØŒ Ù…Ù‚Ø§Ø¨Ù„ Ù…ØµØ±ÙˆÙØ§Øª ØªØ´ØºÙŠÙ„ÙŠØ© Ø³Ù†ÙˆÙŠØ© Ù‚Ø¯Ø±Ù‡Ø§ 267,600 Ø±ÙŠØ§Ù„ Ù„Ù…Ø¨Ù†Ù‰ Ø§Ù„ØªØ¹Ø§ÙˆÙ†.",
+          en: "Mathwa share at the 7% operating model is SAR 121,202, compared with SAR 267,600 in yearly operating expenses for AL TAAWN BUILDING."
+        },
+        summary: {
+          label: "Ù…Ù„Ø®Øµ Ù…Ø¨Ù†Ù‰ Ø§Ù„ØªØ¹Ø§ÙˆÙ†",
+          body: "Ø¥Ø¬Ù…Ø§Ù„ÙŠ Ø§Ù„Ø¥ÙŠØ±Ø§Ø¯ 1,794,857 Ø±ÙŠØ§Ù„ØŒ ÙˆØ¨Ø¹Ø¯ Ø§Ø³ØªÙ‚Ø·Ø§Ø¹Ø§Øª Ù‚Ø¯Ø±Ù‡Ø§ 63,404 Ø±ÙŠØ§Ù„ ÙŠØµÙ„ ØµØ§ÙÙŠ Ø§Ù„Ø¥ÙŠØ±Ø§Ø¯ Ø¥Ù„Ù‰ 1,731,453 Ø±ÙŠØ§Ù„. Ø­ØµØ© Ù…Ø«ÙˆÙ‰ Ø§Ù„Ù…Ø­Ù‚Ù‚Ø© ÙˆØ§Ù„Ù…ØªÙˆÙ‚Ø¹Ø© ØªØ¨Ù„Øº 121,202 Ø±ÙŠØ§Ù„.",
+          revenue: "Ø¥Ø¬Ù…Ø§Ù„ÙŠ Ø§Ù„Ø¥ÙŠØ±Ø§Ø¯",
+          deductions: "Ø¥Ø¬Ù…Ø§Ù„ÙŠ Ø§Ù„Ø§Ø³ØªÙ‚Ø·Ø§Ø¹Ø§Øª",
+          netRevenue: "ØµØ§ÙÙŠ Ø§Ù„Ø¥ÙŠØ±Ø§Ø¯",
+          commission: "Ø­ØµØ© Ù…Ø«ÙˆÙ‰",
+          costs: "Ø¥Ø¬Ù…Ø§Ù„ÙŠ Ø§Ù„Ù…ØµØ±ÙˆÙØ§Øª",
+          gap: "Ø§Ù„ÙØ±Ù‚ Ø¨Ø¹Ø¯ Ø§Ù„Ù…ØµØ±ÙˆÙØ§Øª"
+        },
+        sections: {
+          gapTitle: "ØªØ­Ù„ÙŠÙ„ Ø§Ù„Ø¥ÙŠØ±Ø§Ø¯ ÙˆØ­ØµØ© Ù…Ø«ÙˆÙ‰",
+          gapSubtitle: "Revenue, Deductions, Net Revenue, and Mathwa Share",
+          gapNote: "Ø¥Ø¬Ù…Ø§Ù„ÙŠ Ø§Ù„Ø¥ÙŠØ±Ø§Ø¯ = Ø§Ù„Ø¥ÙŠØ±Ø§Ø¯ Ø§Ù„ÙØ¹Ù„ÙŠ + Ø§Ù„Ø¥ÙŠØ±Ø§Ø¯ Ø§Ù„Ù…ØªÙˆÙ‚Ø¹. ØµØ§ÙÙŠ Ø§Ù„Ø¥ÙŠØ±Ø§Ø¯ = Ø§Ù„Ø¥ÙŠØ±Ø§Ø¯ Ø¨Ø¹Ø¯ Ø§Ø³ØªÙ‚Ø·Ø§Ø¹ Ø§Ù„ØªÙƒØ§Ù„ÙŠÙ. Ø­ØµØ© Ù…Ø«ÙˆÙ‰ = 7% Ù…Ù† Ù†Ù…ÙˆØ°Ø¬ ØµØ§ÙÙŠ Ø§Ù„Ø¥ÙŠØ±Ø§Ø¯.",
+          kpiTitle: "Ø§Ù„Ù…Ø¤Ø´Ø±Ø§Øª Ø§Ù„ØªÙ†ÙÙŠØ°ÙŠØ©",
+          kpiSubtitle: "AL TAAWN BUILDING KPI Strip",
+          comparisonTitle: "Ø¬Ø¯ÙˆÙ„ Ø§Ù„Ù†Ù…ÙˆØ°Ø¬ Ø§Ù„Ù…Ø§Ù„ÙŠ",
+          comparisonSubtitle: "Revenue Breakdown, Deductions, Net Revenue, Share, and Expenses",
+          chartsTitle: "Ù‚Ø±Ø§Ø¡Ø© Ø¨ØµØ±ÙŠØ© Ù„Ù„Ù†Ù…ÙˆØ°Ø¬ Ø§Ù„Ù…Ø§Ù„ÙŠ",
+          chartsSubtitle: "Revenue and Cost Structure",
+          costsTitle: "Ù‡ÙŠÙƒÙ„ Ø§Ù„Ù…ØµØ±ÙˆÙØ§Øª Ø§Ù„ØªØ´ØºÙŠÙ„ÙŠØ© Ø§Ù„Ø³Ù†ÙˆÙŠØ©",
+          costsSubtitle: "Direct and Indirect Costs Breakdown",
+          insightsTitle: "Ù…Ù„Ø®ØµØ§Øª ØªÙ†ÙÙŠØ°ÙŠØ©",
+          insightsSubtitle: "Operational Economics of AL TAAWN BUILDING"
+        },
+        labels: {
+          branch: "Ø§Ù„Ù…Ø´Ø±ÙˆØ¹",
+          owner: "Ø§Ù„Ù†Ù…ÙˆØ°Ø¬",
+          building: "Ø§Ù„Ù…Ø¨Ù†Ù‰",
+          period: "Ø§Ù„ÙØªØ±Ø©",
+          actualRevenue: "Ø¥ÙŠØ±Ø§Ø¯ 10.5 Ø£Ø´Ù‡Ø±",
+          expectedRevenue: "Ø¥ÙŠØ±Ø§Ø¯ Ø§Ù„Ø±Ø¨Ø¹ Ø§Ù„Ø«Ø§Ù†ÙŠ 2026 Ø§Ù„Ù…ØªÙˆÙ‚Ø¹",
+          totalRevenue: "Ø¥Ø¬Ù…Ø§Ù„ÙŠ Ø§Ù„Ø¥ÙŠØ±Ø§Ø¯",
+          actualDeductions: "Ø§Ø³ØªÙ‚Ø·Ø§Ø¹Ø§Øª ÙØ¹Ù„ÙŠØ©",
+          expectedDeductions: "Ø§Ø³ØªÙ‚Ø·Ø§Ø¹Ø§Øª Ù…ØªÙˆÙ‚Ø¹Ø©",
+          totalDeductions: "Ø¥Ø¬Ù…Ø§Ù„ÙŠ Ø§Ù„Ø§Ø³ØªÙ‚Ø·Ø§Ø¹Ø§Øª",
+          actualNetRevenue: "ØµØ§ÙÙŠ Ø§Ù„Ø¥ÙŠØ±Ø§Ø¯ Ø§Ù„ÙØ¹Ù„ÙŠ",
+          expectedNetRevenue: "ØµØ§ÙÙŠ Ø§Ù„Ø¥ÙŠØ±Ø§Ø¯ Ø§Ù„Ù…ØªÙˆÙ‚Ø¹",
+          commissionRate: "Ù†Ø³Ø¨Ø© Ø­ØµØ© Ù…Ø«ÙˆÙ‰",
+          commissionAmount: "Ø­ØµØ© Ù…Ø«ÙˆÙ‰",
+          totalCosts: "Ø¥Ø¬Ù…Ø§Ù„ÙŠ Ø§Ù„Ù…ØµØ±ÙˆÙØ§Øª",
+          costRate: "Ù†Ø³Ø¨Ø© Ø§Ù„ØªÙƒÙ„ÙØ© Ù…Ù† ØµØ§ÙÙŠ Ø§Ù„Ø¥ÙŠØ±Ø§Ø¯",
+          netMargin: "ÙØ±Ù‚ Ø§Ù„Ø­ØµØ© ÙˆØ§Ù„Ù…ØµØ±ÙˆÙØ§Øª",
+          netRevenue: "ØµØ§ÙÙŠ Ø§Ù„Ø¥ÙŠØ±Ø§Ø¯",
+          commissionCollected: "Ø­ØµØ© Ù…Ø«ÙˆÙ‰",
+          operatingCosts: "Ø§Ù„Ù…ØµØ±ÙˆÙØ§Øª Ø§Ù„ØªØ´ØºÙŠÙ„ÙŠØ©",
+          lossPerRiyal: "ÙØ±Ù‚ Ù†Ù…ÙˆØ°Ø¬ 7% Ù…Ù‚Ø§Ø¨Ù„ Ø§Ù„ØªÙƒÙ„ÙØ©",
+          directCosts: "Ø§Ù„ØªÙƒØ§Ù„ÙŠÙ Ø§Ù„Ù…Ø¨Ø§Ø´Ø±Ø©",
+          indirectCosts: "Ø§Ù„ØªÙƒØ§Ù„ÙŠÙ ØºÙŠØ± Ø§Ù„Ù…Ø¨Ø§Ø´Ø±Ø©",
+          directVsIndirect: "Ù…Ø¨Ø§Ø´Ø±Ø© Ù…Ù‚Ø§Ø¨Ù„ ØºÙŠØ± Ù…Ø¨Ø§Ø´Ø±Ø©",
+          groupedBars: "Ø§Ù„Ø¥ÙŠØ±Ø§Ø¯ ÙˆØµØ§ÙÙŠ Ø§Ù„Ø¥ÙŠØ±Ø§Ø¯ ÙˆØ§Ù„Ø§Ø³ØªÙ‚Ø·Ø§Ø¹Ø§Øª",
+          stackedBars: "ØªÙØµÙŠÙ„ Ø§Ù„Ù…ØµØ±ÙˆÙØ§Øª",
+          commissionBridge: "Ø­ØµØ© Ù…Ø«ÙˆÙ‰ Ù…Ù‚Ø§Ø¨Ù„ Ø§Ù„Ù…ØµØ±ÙˆÙØ§Øª",
+          shortfall: "Ø§Ù„ÙØ±Ù‚",
+          subtotal: "Ø§Ù„Ø¥Ø¬Ù…Ø§Ù„ÙŠ Ø§Ù„ÙØ±Ø¹ÙŠ",
+          total: "Ø§Ù„Ø¥Ø¬Ù…Ø§Ù„ÙŠ",
+          critical: "ØªØ­Ù„ÙŠÙ„ Ø§Ù„Ø­ØµØ©",
+          pressure: "Ù‡ÙŠÙƒÙ„ Ø§Ù„ØªÙƒÙ„ÙØ©",
+          exposure: "Ø§Ù„Ù†Ù…ÙˆØ°Ø¬ Ø§Ù„ØªØ´ØºÙŠÙ„ÙŠ",
+          higher: "Ø£Ø¹Ù„Ù‰",
+          lower: "Ø£Ù‚Ù„",
+          printFallback: "Ù†Ø³Ø®Ø© Ø§Ù„Ø·Ø¨Ø§Ø¹Ø© ØªØ¹Ø±Ø¶ Ø§Ù„Ø¬Ø¯Ø§ÙˆÙ„ Ø¨Ø¯Ù„Ø§Ù‹ Ù…Ù† Ø§Ù„Ø±Ø³ÙˆÙ… Ø§Ù„ØªÙØ§Ø¹Ù„ÙŠØ©."
+        },
+        costItems: {
+          payroll: "Ø§Ù„Ø±ÙˆØ§ØªØ¨ ÙˆØ§Ù„Ù…ØµØ§Ø±ÙŠÙ Ø°Ø§Øª Ø§Ù„ØµÙ„Ø© â€” Ù‡Ø§ÙˆØ³Ù…Ø§Ù† ÙˆØ§Ø­Ø¯",
+          supplies: "Ù…Ø³ØªÙ„Ø²Ù…Ø§Øª Ø§Ù„Ø¹Ù‚Ø§Ø± ÙˆØ§Ù„Ø¶ÙŠÙˆÙ",
+          maintenance: "Ø§Ù„ØµÙŠØ§Ù†Ø©",
+          laundry: "Ø§Ù„ØºØ³ÙŠÙ„",
+          supervisor: "Ø§Ù„Ø¥Ø´Ø±Ø§Ù ÙˆØ§Ù„Ø¯Ø¹Ù… Ø§Ù„ØªØ´ØºÙŠÙ„ÙŠ",
+          carRent: "Ø¥ÙŠØ¬Ø§Ø± Ø§Ù„Ø³ÙŠØ§Ø±Ø© ÙˆØ§Ù„ÙˆÙ‚ÙˆØ¯",
+          marketing: "Ø§Ù„ØªØ³ÙˆÙŠÙ‚",
+          reservationSystem: "Ù†Ø¸Ø§Ù… Ø§Ù„Ø­Ø¬ÙˆØ²Ø§Øª",
+          management: "Ø§Ù„Ø¥Ø¯Ø§Ø±Ø© (Ø§Ù„Ø¥Ø¯Ø§Ø±Ø© ÙˆØ§Ù„Ù…Ø§Ù„ÙŠØ© ÙˆØ§Ù„Ù…Ø¨ÙŠØ¹Ø§Øª ÙˆØ§Ù„ØªØ³ÙˆÙŠÙ‚)"
+        },
+        insights: [
+          {
+            title: "Ø¥Ø¬Ù…Ø§Ù„ÙŠ Ø§Ù„Ø¥ÙŠØ±Ø§Ø¯ ÙˆØµØ§ÙÙŠ Ø§Ù„Ø¥ÙŠØ±Ø§Ø¯",
+            body: "Ø¥ÙŠØ±Ø§Ø¯ ÙØªØ±Ø© 10.5 Ø£Ø´Ù‡Ø± ÙŠØ¨Ù„Øº 1,294,857 Ø±ÙŠØ§Ù„ØŒ ÙˆØ§Ù„Ø¥ÙŠØ±Ø§Ø¯ Ø§Ù„Ù…ØªÙˆÙ‚Ø¹ Ù…Ù† Ø§Ù„Ø±Ø¨Ø¹ Ø§Ù„Ø«Ø§Ù†ÙŠ 2026 ÙŠØ¨Ù„Øº 500,000 Ø±ÙŠØ§Ù„ØŒ Ù„ÙŠØµØ¨Ø­ Ø¥Ø¬Ù…Ø§Ù„ÙŠ Ø§Ù„Ø¥ÙŠØ±Ø§Ø¯ 1,794,857 Ø±ÙŠØ§Ù„ ÙˆØµØ§ÙÙŠ Ø§Ù„Ø¥ÙŠØ±Ø§Ø¯ Ø¨Ø¹Ø¯ Ø§Ù„Ø§Ø³ØªÙ‚Ø·Ø§Ø¹Ø§Øª 1,731,453 Ø±ÙŠØ§Ù„.",
+            tone: "gold",
+            badge: "ØªØ­Ù„ÙŠÙ„ Ø§Ù„Ø¥ÙŠØ±Ø§Ø¯"
+          },
+          {
+            title: "Ø­ØµØ© Ù…Ø«ÙˆÙ‰ ÙˆÙÙ‚ Ù†Ù…ÙˆØ°Ø¬ 7%",
+            body: "Ø­ØµØ© Ù…Ø«ÙˆÙ‰ ØªØ¨Ù„Øº 87,252 Ø±ÙŠØ§Ù„ ÙØ¹Ù„ÙŠØ§Ù‹ Ùˆ33,950 Ø±ÙŠØ§Ù„ Ù…ØªÙˆÙ‚Ø¹Ø§Ù‹ØŒ Ø¨Ø¥Ø¬Ù…Ø§Ù„ÙŠ 121,202 Ø±ÙŠØ§Ù„ ÙˆÙÙ‚ Ù†Ù…ÙˆØ°Ø¬ 7% Ù…Ù† Ø§Ù„Ø¥ÙŠØ±Ø§Ø¯ Ø§Ù„Ù…Ø­Ù‚Ù‚/Ø§Ù„ØµØ§ÙÙŠ.",
+            tone: "warning",
+            badge: "Ø­ØµØ© Ù…Ø«ÙˆÙ‰"
+          },
+          {
+            title: "Ø§Ù„Ø¹Ù„Ø§Ù‚Ø© Ø¨ÙŠÙ† Ø§Ù„Ø­ØµØ© ÙˆØ§Ù„Ù…ØµØ±ÙˆÙØ§Øª",
+            body: "Ø¥Ø¬Ù…Ø§Ù„ÙŠ Ø§Ù„Ù…ØµØ±ÙˆÙØ§Øª Ø§Ù„Ø³Ù†ÙˆÙŠØ© ÙŠØ¨Ù„Øº 267,600 Ø±ÙŠØ§Ù„ØŒ ÙˆÙ†Ø³Ø¨Ø© Ø§Ù„ØªÙƒÙ„ÙØ© Ù…Ù† ØµØ§ÙÙŠ Ø§Ù„Ø¥ÙŠØ±Ø§Ø¯ 15%. Ø§Ù„ÙØ±Ù‚ Ø¨ÙŠÙ† Ø­ØµØ© Ù…Ø«ÙˆÙ‰ ÙˆØ§Ù„Ù…ØµØ±ÙˆÙØ§Øª Ø§Ù„ØªØ´ØºÙŠÙ„ÙŠØ© ÙŠØ¨Ù„Øº 146,398 Ø±ÙŠØ§Ù„.",
+            tone: "danger",
+            badge: "Ù‡ÙŠÙƒÙ„ Ø§Ù„ØªÙƒÙ„ÙØ©"
+          }
+        ],
+        footer: {
+          brand: "Ù…Ø«ÙˆÙ‰ Â· Mathwa",
+          preparedAr: "Ø£ÙØ¹Ø¯ Ø¨ÙˆØ§Ø³Ø·Ø©: Ù‚Ø³Ù… Ø§Ù„Ø¹Ù…Ù„ÙŠØ§Øª ÙˆØ§Ù„Ù…Ø§Ù„ÙŠØ© Â· Ù…Ø«ÙˆÙ‰",
+          dateAr: "ØªØ§Ø±ÙŠØ®: Ù…Ø§ÙŠÙˆ 2026 Â· Ø³Ø±ÙŠ ÙˆØ®Ø§Øµ",
+          preparedEn: "Prepared by: Mathwa Operations & Finance Â· May 2026 Â· Confidential"
+        }
+      },
+      en: {
+        dir: "ltr",
+        lang: "en",
+        toggle: "AR",
+        hero: {
+          eyebrow: "Mathwa â€” Executive Report Â· AL TAAWN BUILDING Â· May 2026",
+          title: "AL TAAWN BUILDING Operational Financial Model",
+          subtitle: "Revenue, Net Revenue, Mathwa Share, and Yearly Cost Structure",
+          body: "This report presents the 10.5 month operating revenue, expected Q2 2026 revenue contribution, deductions before net revenue, Mathwa share under the 7% operating model, and the yearly operating expense structure for the project."
+        },
+        alert: {
+          ar: "Mathwa share at the 7% operating model is SAR 121,202, compared with SAR 267,600 in yearly operating expenses for AL TAAWN BUILDING.",
+          en: "Mathwa share at the 7% operating model is SAR 121,202, compared with SAR 267,600 in yearly operating expenses for AL TAAWN BUILDING."
+        },
+        summary: {
+          label: "AL TAAWN BUILDING Summary",
+          body: "Total revenue is SAR 1,794,857. After SAR 63,404 in deductions, net revenue is SAR 1,731,453. Mathwa share across actual and expected revenue is SAR 121,202.",
+          revenue: "Total Revenue",
+          deductions: "Total Deductions",
+          netRevenue: "Net Revenue",
+          commission: "Mathwa Share",
+          costs: "Total Expenses",
+          gap: "Share After Expenses"
+        },
+        sections: {
+          gapTitle: "Revenue and Mathwa Share Analysis",
+          gapSubtitle: "Revenue Breakdown, Deductions, Net Revenue, and Mathwa Share",
+          gapNote: "Total Revenue = Actual Revenue + Expected Revenue. Net Revenue = Revenue after deducted costs. Mathwa Share = 7% of the achieved/net revenue model.",
+          kpiTitle: "Executive KPI Strip",
+          kpiSubtitle: "AL TAAWN BUILDING KPI Strip",
+          comparisonTitle: "Financial Model Table",
+          comparisonSubtitle: "Revenue Breakdown, Deductions, Net Revenue, Share, and Expenses",
+          chartsTitle: "Visual Reading of the Financial Model",
+          chartsSubtitle: "Revenue and Cost Structure",
+          costsTitle: "Yearly Operating Cost Structure",
+          costsSubtitle: "Direct and Indirect Costs Breakdown",
+          insightsTitle: "Executive Summary",
+          insightsSubtitle: "Operational Economics of AL TAAWN BUILDING"
+        },
+        labels: {
+          branch: "Project",
+          owner: "Model",
+          building: "Building",
+          period: "Period",
+          actualRevenue: "Revenue in 10.5 Months",
+          expectedRevenue: "Expected Q2 2026 Revenue",
+          totalRevenue: "Total Revenue",
+          actualDeductions: "Actual Deductions",
+          expectedDeductions: "Expected Deductions",
+          totalDeductions: "Total Deductions",
+          actualNetRevenue: "Actual Net Revenue",
+          expectedNetRevenue: "Expected Net Revenue",
+          commissionRate: "Mathwa Share Rate",
+          commissionAmount: "Mathwa Share",
+          totalCosts: "Total Expenses",
+          costRate: "Cost % from Net Revenue",
+          netMargin: "Share vs. Expenses",
+          netRevenue: "Net Revenue",
+          commissionCollected: "Mathwa Share",
+          operatingCosts: "Operating Expenses",
+          lossPerRiyal: "7% Share Model vs. Cost",
+          directCosts: "Direct Costs",
+          indirectCosts: "Indirect Costs",
+          directVsIndirect: "Direct vs. Indirect",
+          groupedBars: "Revenue, Net Revenue, and Deductions",
+          stackedBars: "Expense Breakdown",
+          commissionBridge: "Mathwa Share vs. Expenses",
+          shortfall: "Difference",
+          subtotal: "Subtotal",
+          total: "Total",
+          critical: "SHARE ANALYSIS",
+          pressure: "COST STRUCTURE",
+          exposure: "OPERATING MODEL",
+          higher: "higher",
+          lower: "lower",
+          printFallback: "Print mode replaces interactive charts with supporting data tables."
+        },
+        costItems: {
+          payroll: "Payroll & related expenses â€” one houseman",
+          supplies: "Property & guest supplies",
+          maintenance: "Maintenance",
+          laundry: "Laundry",
+          supervisor: "Supervisor & operation support",
+          carRent: "Car rent & fuel",
+          marketing: "Marketing expenses",
+          reservationSystem: "Reservation system",
+          management: "Management (admin, finance, sales & marketing)"
+        },
+        insights: [
+          {
+            title: "Revenue and net revenue are clearly separated",
+            body: "Revenue in the 10.5 month operating period is SAR 1,294,857, with SAR 500,000 expected from Q2 2026. Total revenue is SAR 1,794,857 and net revenue after deductions is SAR 1,731,453.",
+            tone: "gold",
+            badge: "REVENUE"
+          },
+          {
+            title: "Mathwa share follows the 7% operating model",
+            body: "Mathwa share is SAR 87,252 actual and SAR 33,950 expected, for a total of SAR 121,202 according to the 7% achieved/net revenue model.",
+            tone: "warning",
+            badge: "MATHWA SHARE"
+          },
+          {
+            title: "Yearly expenses define the operating economics",
+            body: "Total yearly expenses are SAR 267,600, equal to 15% of net revenue. The difference between Mathwa share and yearly operating expenses is SAR 146,398.",
+            tone: "danger",
+            badge: "TOTAL COST"
+          }
+        ],
+        footer: {
+          brand: "Mathwa Â· Ù…Ø«ÙˆÙ‰",
+          preparedAr: "Prepared by: Mathwa Operations & Finance",
+          dateAr: "Date: May 2026 Â· Confidential",
+          preparedEn: "Prepared by: Mathwa Operations & Finance Â· May 2026 Â· Confidential"
+        }
+      }
+    };
+
+    function repairMojibake(value) {
+      if (typeof value === "string" && /[ÂÃØÙâ]/.test(value)) {
+        try {
+          const cp1252 = {
+            0x20AC: 0x80,
+            0x201A: 0x82,
+            0x0192: 0x83,
+            0x201E: 0x84,
+            0x2026: 0x85,
+            0x2020: 0x86,
+            0x2021: 0x87,
+            0x02C6: 0x88,
+            0x2030: 0x89,
+            0x0160: 0x8A,
+            0x2039: 0x8B,
+            0x0152: 0x8C,
+            0x017D: 0x8E,
+            0x2018: 0x91,
+            0x2019: 0x92,
+            0x201C: 0x93,
+            0x201D: 0x94,
+            0x2022: 0x95,
+            0x2013: 0x96,
+            0x2014: 0x97,
+            0x02DC: 0x98,
+            0x2122: 0x99,
+            0x0161: 0x9A,
+            0x203A: 0x9B,
+            0x0153: 0x9C,
+            0x017E: 0x9E,
+            0x0178: 0x9F
+          };
+          return new TextDecoder("utf-8", { fatal: true }).decode(
+            Uint8Array.from(value, function (char) {
+              const code = char.charCodeAt(0);
+              return cp1252[code] ?? (code & 255);
+            })
+          );
+        } catch (error) {
+          return value;
+        }
+      }
+
+      if (Array.isArray(value)) {
+        value.forEach(function (item, index) {
+          value[index] = repairMojibake(item);
+        });
+        return value;
+      }
+
+      if (value && typeof value === "object") {
+        Object.keys(value).forEach(function (key) {
+          value[key] = repairMojibake(value[key]);
+        });
+      }
+
+      return value;
+    }
+
+    repairMojibake(DATA);
+
+    const state = {
+      lang: "ar",
+      charts: [],
+      revealObserver: null,
+      countObserver: null
+    };
+
+    function formatNumber(value) {
+      return Math.round(value).toLocaleString("en-SA");
+    }
+
+    function formatCurrency(value) {
+      const sign = value < 0 ? "-" : "";
+      return sign + formatNumber(Math.abs(value)) + " SAR";
+    }
+
+    function formatPercent(value) {
+      const sign = value < 0 ? "-" : "";
+      return sign + (Math.abs(value) * 100).toLocaleString("en-SA", {
+        maximumFractionDigits: 0
+      }) + "%";
+    }
+
+    function escapeHtml(text) {
+      return String(text)
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;")
+        .replace(/'/g, "&#39;");
+    }
+
+    function getCopy() {
+      return DATA.copy[state.lang];
+    }
+
+    function getBranchGap(branch) {
+      return branch.commissionTotal - branch.totalCosts;
+    }
+
+    function getCoverageRatio(branch) {
+      return branch.commissionTotal / branch.totalCosts;
+    }
+
+    function getGapRatio(branch) {
+      return Math.abs(getBranchGap(branch)) / branch.totalCosts;
+    }
+
+    function countMarkup(value, format) {
+      return '<span class="countup mono" data-target="' + value + '" data-format="' + format + '">0</span>';
+    }
+
+    function buildSummaryTiles(copy) {
+      const headline = DATA.headline;
+      return [
+        { label: copy.summary.revenue, value: headline.totalRevenue },
+        { label: copy.summary.deductions, value: headline.totalDeductions },
+        { label: copy.summary.netRevenue, value: headline.netRevenue },
+        { label: copy.summary.commission, value: headline.totalCommission },
+        { label: copy.summary.costs, value: headline.totalCosts },
+        { label: copy.summary.gap, value: headline.operationalGap }
+      ].map(function (tile) {
+        return '' +
+          '<div class="summary-tile">' +
+            '<span class="summary-label">' + escapeHtml(tile.label) + '</span>' +
+            '<div class="summary-number">' + countMarkup(tile.value, "currency") + '</div>' +
+          '</div>';
+      }).join("");
+    }
+
+    function buildHero(copy) {
+      const alertPrimary = state.lang === "ar" ? DATA.copy.ar.alert.ar : DATA.copy.en.alert.en;
+      const alertSecondary = state.lang === "ar" ? DATA.copy.en.alert.en : DATA.copy.ar.alert.ar;
+      const alertPrimaryDir = state.lang === "ar" ? "rtl" : "ltr";
+      const alertSecondaryDir = state.lang === "ar" ? "ltr" : "rtl";
+
+      return '' +
+        '<section class="hero reveal">' +
+          '<div class="hero-grid">' +
+            '<div>' +
+              '<div class="eyebrow">' + escapeHtml(copy.hero.eyebrow) + '</div>' +
+              '<h1 class="hero-title">' + escapeHtml(copy.hero.title) + '</h1>' +
+              '<p class="hero-subtitle">' + escapeHtml(copy.hero.subtitle) + '</p>' +
+              '<p class="hero-body">' + escapeHtml(copy.hero.body) + '</p>' +
+              '<div class="alert-banner">' +
+                '<div class="alert-icon" aria-hidden="true">!</div>' +
+                '<div class="alert-text">' +
+                  '<div class="alert-primary" dir="' + alertPrimaryDir + '">' + escapeHtml(alertPrimary) + '</div>' +
+                  '<div class="alert-secondary" dir="' + alertSecondaryDir + '">' + escapeHtml(alertSecondary) + '</div>' +
+                '</div>' +
+              '</div>' +
+            '</div>' +
+            '<div class="card-shell summary-card reveal">' +
+              '<div class="card-core">' +
+                '<div class="summary-caption">' + escapeHtml(copy.summary.label) + '</div>' +
+                '<div class="summary-value">' + countMarkup(DATA.headline.operationalGap, "currency") + '</div>' +
+                '<p class="summary-body">' + escapeHtml(copy.summary.body) + '</p>' +
+                '<div class="summary-grid">' + buildSummaryTiles(copy) + '</div>' +
+              '</div>' +
+            '</div>' +
+          '</div>' +
+        '</section>';
+    }
+
+    function buildSectionHeader(title, subtitle, note) {
+      return '' +
+        '<div class="section-header reveal">' +
+          '<div>' +
+            '<h2 class="section-title">' + escapeHtml(title) + '</h2>' +
+            '<p class="section-subtitle">' + escapeHtml(subtitle) + '</p>' +
+          '</div>' +
+          (note ? '<div class="section-note">' + escapeHtml(note) + '</div>' : '') +
+        '</div>';
+    }
+
+    function buildGapCards(copy) {
+      return DATA.branches.map(function (branch) {
+        const branchColor = 'var(' + branch.branchColorVar + ')';
+        return '' +
+          '<article class="card-shell gauge-card reveal" style="--branch-color:' + branchColor + ';">' +
+            '<div class="card-core">' +
+              '<div class="branch-header">' +
+                '<div>' +
+                  '<div class="branch-tag"><span class="branch-dot"></span>' + escapeHtml(branch.name[state.lang]) + '</div>' +
+                  '<h3 class="branch-name">' + escapeHtml(branch.owner[state.lang]) + ' - ' + escapeHtml(branch.building) + '</h3>' +
+                '</div>' +
+                '<div class="branch-meta">' +
+                  '<div>' + escapeHtml(copy.labels.period) + ': ' + escapeHtml(branch.period) + '</div>' +
+                  '<div>' + escapeHtml(copy.labels.totalDeductions) + ': <span class="mono">' + formatCurrency(branch.totalDeductions) + '</span></div>' +
+                  (branch.netRevenue ? '<div>' + escapeHtml(copy.labels.netRevenue) + ': <span class="mono">' + formatCurrency(branch.netRevenue) + '</span></div>' : "") +
+                '</div>' +
+              '</div>' +
+              '<div class="gauge-summary">' +
+                '<div class="gauge-row">' +
+                  '<div class="gauge-topline">' +
+                    '<div class="gauge-label">' + escapeHtml(copy.labels.commissionCollected) + '</div>' +
+                    '<div class="gauge-percent gold">' + countMarkup(branch.commissionPct, "percent") + '</div>' +
+                  '</div>' +
+                  '<div class="bar-track">' +
+                    '<div class="bar-fill gold" style="--target-scale:' + branch.commissionPct + ';"></div>' +
+                  '</div>' +
+                '</div>' +
+                '<div class="gauge-row">' +
+                  '<div class="gauge-topline">' +
+                    '<div class="gauge-label">' + escapeHtml(copy.labels.operatingCosts) + '</div>' +
+                    '<div class="gauge-percent danger">' + countMarkup(branch.costPct, "percent") + '</div>' +
+                  '</div>' +
+                  '<div class="bar-track">' +
+                    '<div class="bar-fill danger" style="--target-scale:' + branch.costPct + ';"></div>' +
+                  '</div>' +
+                '</div>' +
+                '<div class="gap-loss">' +
+                  '<div class="loss-label">' + escapeHtml(copy.labels.lossPerRiyal) + '</div>' +
+                  '<div class="loss-value">' + countMarkup(branch.netMargin, "percent") + '</div>' +
+                  '<div class="loss-caption">' + formatCurrency(getBranchGap(branch)) + '</div>' +
+                '</div>' +
+              '</div>' +
+            '</div>' +
+          '</article>';
+      }).join("");
+    }
+
+    function buildGapSection(copy) {
+      return '' +
+        '<section>' +
+          buildSectionHeader(copy.sections.gapTitle, copy.sections.gapSubtitle, copy.sections.gapNote) +
+          '<div class="gap-grid single-branch-grid stagger-grid">' + buildGapCards(copy) + '</div>' +
+        '</section>';
+    }
+
+    function buildKpiCards(branch, copy) {
+      const cards = [
+        { label: copy.labels.actualRevenue, value: branch.actualRevenue, format: "currency", foot: branch.period },
+        { label: copy.labels.expectedRevenue, value: branch.expectedRevenue, format: "currency", foot: "Q2 2026" },
+        { label: copy.labels.totalRevenue, value: branch.totalRevenue, format: "currency", foot: branch.building },
+        { label: copy.labels.totalDeductions, value: branch.totalDeductions, format: "currency", foot: formatCurrency(branch.actualDeductions) + " + " + formatCurrency(branch.expectedDeductions) },
+        { label: copy.labels.netRevenue, value: branch.netRevenue, format: "currency", foot: formatCurrency(branch.actualNetRevenue) + " + " + formatCurrency(branch.expectedNetRevenue) },
+        { label: copy.labels.commissionAmount, value: branch.commissionTotal, format: "currency", foot: formatPercent(branch.commissionRate) },
+        { label: copy.labels.totalCosts, value: branch.totalCosts, format: "currency", foot: formatPercent(branch.costPct) },
+        { label: copy.labels.netMargin, value: branch.netMargin, format: "percent", foot: formatCurrency(getBranchGap(branch)), loss: true }
+      ];
+
+      return cards.map(function (card) {
+        return '' +
+          '<div class="card-shell kpi-card-shell metric-card reveal ' + (card.loss ? 'metric-loss' : '') + '">' +
+            '<div class="card-core">' +
+              '<div class="metric-label">' + escapeHtml(card.label) + '</div>' +
+              '<div class="metric-value">' + countMarkup(card.value, card.format) + '</div>' +
+              '<div class="metric-foot">' + escapeHtml(card.foot) + '</div>' +
+            '</div>' +
+          '</div>';
+      }).join("");
+    }
+
+    function buildKpiSection(copy) {
+      return '' +
+        '<section>' +
+          buildSectionHeader(copy.sections.kpiTitle, copy.sections.kpiSubtitle, "") +
+          '<div class="kpi-strip">' +
+            DATA.branches.map(function (branch) {
+              const branchColor = 'var(' + branch.branchColorVar + ')';
+              return '' +
+                '<div class="kpi-row" style="--branch-color:' + branchColor + ';">' +
+                  '<div class="kpi-row-head reveal">' +
+                    '<div>' +
+                      '<div class="kpi-row-title">' + escapeHtml(branch.name[state.lang]) + ' - ' + escapeHtml(branch.owner[state.lang]) + '</div>' +
+                      '<div class="kpi-row-subtitle">' + escapeHtml(branch.building) + '</div>' +
+                    '</div>' +
+                    '<div class="kpi-row-subtitle">' + escapeHtml(copy.labels.period) + ': ' + escapeHtml(branch.period) + '</div>' +
+                  '</div>' +
+                  '<div class="kpi-scroll stagger-grid">' + buildKpiCards(branch, copy) + '</div>' +
+                '</div>';
+            }).join("") +
+          '</div>' +
+        '</section>';
+    }
+
+    function arrowBadge(isHigher, copy) {
+      return '<span class="arrow-badge ' + (isHigher ? 'warning' : 'danger') + '">' +
+        (isHigher ? escapeHtml(copy.labels.higher) : escapeHtml(copy.labels.lower)) +
+      '</span>';
+    }
+
+    function buildComparisonRows(copy) {
+      return DATA.branches.map(function (branch) {
+        const costHigher = branch.costPct > branch.commissionPct;
+        return '' +
+          '<tr>' +
+            '<td><span class="branch-badge">' + escapeHtml(branch.name[state.lang]) + '</span></td>' +
+            '<td>' + escapeHtml(branch.owner[state.lang]) + '</td>' +
+            '<td>' + escapeHtml(branch.building) + '</td>' +
+            '<td class="mono">' + formatCurrency(branch.actualRevenue) + '</td>' +
+            '<td class="mono">' + formatCurrency(branch.expectedRevenue) + '</td>' +
+            '<td class="mono">' + formatCurrency(branch.totalRevenue) + '</td>' +
+            '<td class="mono">' + formatCurrency(branch.actualDeductions) + '</td>' +
+            '<td class="mono">' + formatCurrency(branch.expectedDeductions) + '</td>' +
+            '<td class="mono">' + formatCurrency(branch.totalDeductions) + '</td>' +
+            '<td class="mono">' + formatCurrency(branch.actualNetRevenue) + '</td>' +
+            '<td class="mono">' + formatCurrency(branch.expectedNetRevenue) + '</td>' +
+            '<td class="mono">' + formatCurrency(branch.netRevenue) + '</td>' +
+            '<td class="mono">' + formatPercent(branch.commissionRate) + ' ' + arrowBadge(false, copy) + '</td>' +
+            '<td class="mono">' + formatCurrency(branch.commissionTotal) + '</td>' +
+            '<td class="mono">' + formatCurrency(branch.totalCosts) + '</td>' +
+            '<td class="mono">' + formatPercent(branch.costPct) + ' ' + arrowBadge(costHigher, copy) + '</td>' +
+            '<td><span class="status-badge danger mono">' + formatPercent(branch.netMargin) + '</span></td>' +
+          '</tr>';
+      }).join("");
+    }
+
+    function buildComparisonSection(copy) {
+      return '' +
+        '<section>' +
+          buildSectionHeader(copy.sections.comparisonTitle, copy.sections.comparisonSubtitle, "") +
+          '<div class="card-shell comparison-card reveal">' +
+            '<div class="card-core">' +
+              '<div class="table-wrap">' +
+                '<table>' +
+                  '<thead>' +
+                    '<tr>' +
+                      '<th>' + escapeHtml(copy.labels.branch) + '</th>' +
+                      '<th>' + escapeHtml(copy.labels.owner) + '</th>' +
+                      '<th>' + escapeHtml(copy.labels.building) + '</th>' +
+                      '<th>' + escapeHtml(copy.labels.actualRevenue) + '</th>' +
+                      '<th>' + escapeHtml(copy.labels.expectedRevenue) + '</th>' +
+                      '<th>' + escapeHtml(copy.labels.totalRevenue) + '</th>' +
+                      '<th>' + escapeHtml(copy.labels.actualDeductions) + '</th>' +
+                      '<th>' + escapeHtml(copy.labels.expectedDeductions) + '</th>' +
+                      '<th>' + escapeHtml(copy.labels.totalDeductions) + '</th>' +
+                      '<th>' + escapeHtml(copy.labels.actualNetRevenue) + '</th>' +
+                      '<th>' + escapeHtml(copy.labels.expectedNetRevenue) + '</th>' +
+                      '<th>' + escapeHtml(copy.labels.netRevenue) + '</th>' +
+                      '<th>' + escapeHtml(copy.labels.commissionRate) + '</th>' +
+                      '<th>' + escapeHtml(copy.labels.commissionAmount) + '</th>' +
+                      '<th>' + escapeHtml(copy.labels.totalCosts) + '</th>' +
+                      '<th>' + escapeHtml(copy.labels.costRate) + '</th>' +
+                      '<th>' + escapeHtml(copy.labels.netMargin) + '</th>' +
+                    '</tr>' +
+                  '</thead>' +
+                  '<tbody>' + buildComparisonRows(copy) + '</tbody>' +
+                '</table>' +
+              '</div>' +
+            '</div>' +
+          '</div>' +
+        '</section>';
+    }
+
+    function buildChartPrintTable(copy) {
+      return '' +
+        '<div class="print-only">' +
+          '<div class="table-wrap">' +
+            '<table>' +
+              '<thead>' +
+                '<tr>' +
+                  '<th>' + escapeHtml(copy.labels.branch) + '</th>' +
+                  '<th>' + escapeHtml(copy.labels.totalRevenue) + '</th>' +
+                  '<th>' + escapeHtml(copy.labels.totalDeductions) + '</th>' +
+                  '<th>' + escapeHtml(copy.labels.netRevenue) + '</th>' +
+                  '<th>' + escapeHtml(copy.labels.commissionAmount) + '</th>' +
+                  '<th>' + escapeHtml(copy.labels.totalCosts) + '</th>' +
+                  '<th>' + escapeHtml(copy.labels.directCosts) + '</th>' +
+                  '<th>' + escapeHtml(copy.labels.indirectCosts) + '</th>' +
+                  '<th>' + escapeHtml(copy.labels.netMargin) + '</th>' +
+                '</tr>' +
+              '</thead>' +
+              '<tbody>' +
+                DATA.branches.map(function (branch) {
+                  return '' +
+                    '<tr>' +
+                      '<td>' + escapeHtml(branch.name[state.lang]) + '</td>' +
+                      '<td class="mono">' + formatCurrency(branch.totalRevenue) + '</td>' +
+                      '<td class="mono">' + formatCurrency(branch.totalDeductions) + '</td>' +
+                      '<td class="mono">' + formatCurrency(branch.netRevenue) + '</td>' +
+                      '<td class="mono">' + formatCurrency(branch.commissionTotal) + '</td>' +
+                      '<td class="mono">' + formatCurrency(branch.totalCosts) + '</td>' +
+                      '<td class="mono">' + formatCurrency(branch.directCosts.subtotal) + '</td>' +
+                      '<td class="mono">' + formatCurrency(branch.indirectCosts.subtotal) + '</td>' +
+                      '<td class="mono">' + formatPercent(branch.netMargin) + '</td>' +
+                    '</tr>';
+                }).join("") +
+              '</tbody>' +
+            '</table>' +
+          '</div>' +
+          '<p class="chart-note">' + escapeHtml(copy.labels.printFallback) + '</p>' +
+        '</div>';
+    }
+
+    function buildChartsSection(copy) {
+      return '' +
+        '<section>' +
+          buildSectionHeader(copy.sections.chartsTitle, copy.sections.chartsSubtitle, "") +
+          '<div class="charts-grid">' +
+            '<div class="card-shell chart-card reveal">' +
+              '<div class="card-core">' +
+                '<div>' +
+                  '<h3 class="insight-title">' + escapeHtml(copy.labels.groupedBars) + '</h3>' +
+                  '<p class="chart-note">' + escapeHtml(copy.sections.gapSubtitle) + '</p>' +
+                '</div>' +
+                '<div class="chart-stage screen-only"><canvas id="commissionCostChart"></canvas></div>' +
+                '<p class="chart-fallback" id="chartFallbackA" hidden>Chart.js unavailable. Data remains available in the table below.</p>' +
+                buildChartPrintTable(copy) +
+              '</div>' +
+            '</div>' +
+            '<div class="card-shell chart-card reveal">' +
+              '<div class="card-core">' +
+                '<div>' +
+                  '<h3 class="insight-title">' + escapeHtml(copy.labels.stackedBars) + '</h3>' +
+                  '<p class="chart-note">' + escapeHtml(copy.labels.directVsIndirect) + '</p>' +
+                '</div>' +
+                '<div class="chart-stage screen-only"><canvas id="costBreakdownChart"></canvas></div>' +
+                '<p class="chart-fallback" id="chartFallbackB" hidden>Chart.js unavailable. Data remains available in the cost tables below.</p>' +
+                buildChartPrintTable(copy) +
+              '</div>' +
+          '</div>' +
+        '</section>';
+    }
+
+    function buildCostRows(items, subtotal, labels, copy) {
+      const keys = Object.keys(items).filter(function (key) { return key !== "subtotal"; });
+      const rows = keys.map(function (key) {
+        return '' +
+          '<tr>' +
+            '<td>' + escapeHtml(labels[key]) + '</td>' +
+            '<td class="mono">' + formatCurrency(items[key]) + '</td>' +
+          '</tr>';
+      }).join("");
+
+      return rows + '' +
+        '<tr class="total-row">' +
+          '<td>' + escapeHtml(copy.labels.subtotal) + '</td>' +
+          '<td class="mono">' + formatCurrency(subtotal) + '</td>' +
+        '</tr>';
+    }
+
+    function buildCostSection(copy) {
+      return '' +
+        '<section>' +
+          buildSectionHeader(copy.sections.costsTitle, copy.sections.costsSubtitle, "") +
+          '<div class="cost-grid single-branch-grid">' +
+            DATA.branches.map(function (branch) {
+              const branchColor = 'var(' + branch.branchColorVar + ')';
+              return '' +
+                '<div class="card-shell cost-card reveal" style="--branch-color:' + branchColor + '; --commission-scale:' + getCoverageRatio(branch) + '; --gap-scale:' + getGapRatio(branch) + ';">' +
+                  '<div class="card-core">' +
+                    '<div class="branch-header">' +
+                      '<div>' +
+                        '<div class="branch-tag"><span class="branch-dot"></span>' + escapeHtml(branch.name[state.lang]) + '</div>' +
+                        '<h3 class="branch-name">' + escapeHtml(branch.owner[state.lang]) + '</h3>' +
+                      '</div>' +
+                      '<div class="branch-meta">' + escapeHtml(branch.building) + '</div>' +
+                    '</div>' +
+                    '<div class="subtable">' +
+                      '<div class="subtable-head">' + escapeHtml(copy.labels.directCosts) + '</div>' +
+                      '<table>' +
+                        '<tbody>' + buildCostRows(branch.directCosts, branch.directCosts.subtotal, copy.costItems, copy) + '</tbody>' +
+                      '</table>' +
+                    '</div>' +
+                    '<div class="subtable">' +
+                      '<div class="subtable-head">' + escapeHtml(copy.labels.indirectCosts) + '</div>' +
+                      '<table>' +
+                        '<tbody>' + buildCostRows(branch.indirectCosts, branch.indirectCosts.subtotal, copy.costItems, copy) + '</tbody>' +
+                      '</table>' +
+                    '</div>' +
+                    '<div class="cost-bridge">' +
+                      '<div class="cost-bridge-head">' +
+                        '<span>' + escapeHtml(copy.labels.commissionBridge) + '</span>' +
+                        '<span class="mono">' + formatCurrency(branch.commissionTotal) + ' / ' + formatCurrency(branch.totalCosts) + '</span>' +
+                      '</div>' +
+                      '<div class="bridge-track">' +
+                        '<div class="bridge-commission" style="width:100%;"></div>' +
+                        '<div class="bridge-gap" style="inset-inline-start:' + (getCoverageRatio(branch) * 100) + '%; width:100%;"></div>' +
+                      '</div>' +
+                      '<div class="bridge-foot">' +
+                        '<span>' + escapeHtml(copy.labels.commissionAmount) + ': <span class="mono">' + formatCurrency(branch.commissionTotal) + '</span></span>' +
+                        '<span>' + escapeHtml(copy.labels.shortfall) + ': <span class="mono">' + formatCurrency(getBranchGap(branch)) + '</span></span>' +
+                      '</div>' +
+                    '</div>' +
+                  '</div>' +
+                '</div>';
+            }).join("") +
+          '</div>' +
+        '</section>';
+    }
+
+    function buildInsightsSection(copy) {
+      return '' +
+        '<section>' +
+          buildSectionHeader(copy.sections.insightsTitle, copy.sections.insightsSubtitle, "") +
+          '<div class="insights-grid stagger-grid">' +
+            copy.insights.map(function (item) {
+              return '' +
+                '<article class="card-shell insight-card reveal">' +
+                  '<div class="card-core">' +
+                    '<div class="card-badge-row">' +
+                      '<span class="card-badge ' + escapeHtml(item.tone) + '">' + escapeHtml(item.badge) + '</span>' +
+                    '</div>' +
+                    '<h3 class="insight-title">' + escapeHtml(item.title) + '</h3>' +
+                    '<p class="insight-body">' + escapeHtml(item.body) + '</p>' +
+                  '</div>' +
+                '</article>';
+            }).join("") +
+          '</div>' +
+        '</section>';
+    }
+
+    function buildFooter(copy) {
+      return '' +
+        '<footer style="margin-top:2rem;">' +
+          '<div class="footer-grid">' +
+            '<div class="card-shell footer-card reveal">' +
+              '<div class="card-core">' +
+                '<div class="footer-brand">' + escapeHtml(copy.footer.brand) + '</div>' +
+                '<div class="footer-meta">' + escapeHtml(copy.footer.preparedAr) + '</div>' +
+              '</div>' +
+            '</div>' +
+            '<div class="card-shell footer-card reveal">' +
+              '<div class="card-core">' +
+                '<div class="footer-meta">' + escapeHtml(copy.footer.dateAr) + '</div>' +
+                '<div class="footer-meta">' + escapeHtml(copy.footer.preparedEn) + '</div>' +
+              '</div>' +
+            '</div>' +
+          '</div>' +
+        '</footer>';
+    }
+
+    function renderApp() {
+      const copy = getCopy();
+      document.documentElement.lang = copy.lang;
+      document.documentElement.dir = copy.dir;
+      document.getElementById("langToggle").textContent = copy.toggle;
+
+      const html = '' +
+        '<div class="page">' +
+          buildHero(copy) +
+          buildGapSection(copy) +
+          buildKpiSection(copy) +
+          buildComparisonSection(copy) +
+          buildChartsSection(copy) +
+          buildCostSection(copy) +
+          buildInsightsSection(copy) +
+          buildFooter(copy) +
+        '</div>';
+
+      document.getElementById("app").innerHTML = html;
+      initObservers();
+      initCharts();
+    }
+
+    function destroyCharts() {
+      state.charts.forEach(function (chart) {
+        chart.destroy();
+      });
+      state.charts = [];
+    }
+
+    function getCssVar(name) {
+      return getComputedStyle(document.documentElement).getPropertyValue(name).trim();
+    }
+
+    function chartLabelColor() {
+      return getCssVar("--gold-light");
+    }
+
+    function baseChartOptions() {
+      return {
+        responsive: true,
+        maintainAspectRatio: false,
+        animation: {
+          duration: 1200,
+          easing: "easeOutQuart"
+        },
+        plugins: {
+          legend: {
+            labels: {
+              color: chartLabelColor(),
+              font: {
+                family: "Tajawal"
+              }
+            }
+          },
+          tooltip: {
+            backgroundColor: getCssVar("--card-elevated"),
+            titleColor: getCssVar("--gold-light"),
+            bodyColor: getCssVar("--text-primary"),
+            borderColor: getCssVar("--surface-line-strong"),
+            borderWidth: 1,
+            callbacks: {
+              label: function (context) {
+                return context.dataset.label + ": " + formatCurrency(context.parsed.y ?? context.parsed);
+              }
+            }
+          }
+        }
+      };
+    }
+
+    function initCharts() {
+      destroyCharts();
+
+      if (!window.Chart) {
+        ["chartFallbackA", "chartFallbackB"].forEach(function (id) {
+          const node = document.getElementById(id);
+          if (node) {
+            node.hidden = false;
+          }
+        });
+        return;
+      }
+
+      Chart.defaults.color = chartLabelColor();
+      Chart.defaults.borderColor = "transparent";
+      Chart.defaults.font.family = "Tajawal";
+
+      const copy = getCopy();
+      const branchLabels = DATA.branches.map(function (branch) {
+        return branch.name[state.lang];
+      });
+
+      const commissionCostCtx = document.getElementById("commissionCostChart");
+      if (commissionCostCtx) {
+        state.charts.push(new Chart(commissionCostCtx, {
+          type: "bar",
+          data: {
+            labels: branchLabels,
+            datasets: [
+              {
+                label: copy.labels.totalRevenue,
+                data: DATA.branches.map(function (branch) { return branch.totalRevenue; }),
+                backgroundColor: getCssVar("--gold"),
+                borderRadius: 14
+              },
+              {
+                label: copy.labels.netRevenue,
+                data: DATA.branches.map(function (branch) { return branch.netRevenue; }),
+                backgroundColor: getCssVar("--gold-dim"),
+                borderRadius: 14
+              },
+              {
+                label: copy.labels.totalDeductions,
+                data: DATA.branches.map(function (branch) { return branch.totalDeductions; }),
+                backgroundColor: getCssVar("--danger-solid-soft"),
+                borderRadius: 14
+              }
+            ]
+          },
+          options: Object.assign(baseChartOptions(), {
+            scales: {
+              x: {
+                grid: {
+                  display: false
+                },
+                ticks: {
+                  color: chartLabelColor()
+                }
+              },
+              y: {
+                grid: {
+                  color: "transparent"
+                },
+                ticks: {
+                  color: chartLabelColor(),
+                  callback: function (value) {
+                    return formatNumber(value);
+                  }
+                }
+              }
+            }
+          })
+        }));
+      }
+
+      const costBreakdownCtx = document.getElementById("costBreakdownChart");
+      if (costBreakdownCtx) {
+        state.charts.push(new Chart(costBreakdownCtx, {
+          type: "bar",
+          data: {
+            labels: branchLabels,
+            datasets: [
+              {
+                label: copy.labels.directCosts,
+                data: DATA.branches.map(function (branch) { return branch.directCosts.subtotal; }),
+                backgroundColor: getCssVar("--gold-dim"),
+                borderRadius: 14,
+                stack: "costs"
+              },
+              {
+                label: copy.labels.indirectCosts,
+                data: DATA.branches.map(function (branch) { return branch.indirectCosts.subtotal; }),
+                backgroundColor: getCssVar("--chart-indirect"),
+                borderColor: getCssVar("--gold-light"),
+                borderWidth: 1,
+                borderRadius: 14,
+                stack: "costs"
+              }
+            ]
+          },
+          options: Object.assign(baseChartOptions(), {
+            scales: {
+              x: {
+                stacked: true,
+                grid: {
+                  display: false
+                },
+                ticks: {
+                  color: chartLabelColor()
+                }
+              },
+              y: {
+                stacked: true,
+                grid: {
+                  color: "transparent"
+                },
+                ticks: {
+                  color: chartLabelColor(),
+                  callback: function (value) {
+                    return formatNumber(value);
+                  }
+                }
+              }
+            }
+          })
+        }));
+      }
+    }
+
+    function animateCount(element) {
+      const target = Number(element.dataset.target);
+      const format = element.dataset.format;
+      const duration = 1500;
+      const start = performance.now();
+
+      function tick(now) {
+        const progress = Math.min((now - start) / duration, 1);
+        const eased = 1 - Math.pow(1 - progress, 4);
+        const value = target * eased;
+
+        if (format === "currency") {
+          element.textContent = formatCurrency(value);
+        } else if (format === "percent") {
+          element.textContent = formatPercent(value);
+        } else {
+          element.textContent = formatNumber(value);
+        }
+
+        if (progress < 1) {
+          requestAnimationFrame(tick);
+        } else {
+          if (format === "currency") {
+            element.textContent = formatCurrency(target);
+          } else if (format === "percent") {
+            element.textContent = formatPercent(target);
+          } else {
+            element.textContent = formatNumber(target);
+          }
+        }
+      }
+
+      requestAnimationFrame(tick);
+    }
+
+    function initObservers() {
+      if (state.revealObserver) {
+        state.revealObserver.disconnect();
+      }
+      if (state.countObserver) {
+        state.countObserver.disconnect();
+      }
+
+      state.revealObserver = new IntersectionObserver(function (entries) {
+        entries.forEach(function (entry) {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("is-visible");
+            state.revealObserver.unobserve(entry.target);
+          }
+        });
+      }, {
+        threshold: 0.18
+      });
+
+      state.countObserver = new IntersectionObserver(function (entries) {
+        entries.forEach(function (entry) {
+          if (entry.isIntersecting && !entry.target.dataset.counted) {
+            entry.target.dataset.counted = "true";
+            animateCount(entry.target);
+            state.countObserver.unobserve(entry.target);
+          }
+        });
+      }, {
+        threshold: 0.3
+      });
+
+      document.querySelectorAll(".reveal").forEach(function (node) {
+        state.revealObserver.observe(node);
+      });
+
+      document.querySelectorAll(".countup").forEach(function (node) {
+        state.countObserver.observe(node);
+      });
+    }
+
+    document.getElementById("langToggle").addEventListener("click", function () {
+      state.lang = state.lang === "ar" ? "en" : "ar";
+      renderApp();
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    });
+
+    renderApp();
+  </script>
+</body>
+</html>
+
