@@ -932,14 +932,496 @@
       display: none;
     }
 
+    .executive-card .card-core,
+    .statement-card .card-core,
+    .timeline-card .card-core,
+    .overview-card .card-core,
+    .occupancy-card .card-core,
+    .revenue-card .card-core,
+    .progress-card .card-core,
+    .fee-card .card-core,
+    .media-card .card-core,
+    .tiktok-card .card-core,
+    .investment-card .card-core,
+    .architectural-card .card-core {
+      display: grid;
+      gap: 1.15rem;
+    }
+
+    .statement-card .card-core {
+      background:
+        linear-gradient(135deg, rgba(201,169,110,0.2), transparent 58%),
+        linear-gradient(180deg, rgba(201,169,110,0.08), transparent 70%),
+        var(--card-bg);
+      border: 1px solid rgba(201,169,110,0.3);
+      box-shadow:
+        0 24px 60px rgba(0,0,0,0.28),
+        0 0 0 1px rgba(201,169,110,0.05),
+        0 0 40px rgba(201,169,110,0.08);
+    }
+
+    .statement-title {
+      margin: 0;
+      font-size: clamp(1.8rem, 3vw, 2.65rem);
+      line-height: 1.15;
+      color: var(--gold-light);
+    }
+
+    .statement-body {
+      margin: 0;
+      color: var(--text-primary);
+      white-space: pre-line;
+      font-size: 1.03rem;
+      line-height: 1.9;
+    }
+
+    .overview-grid,
+    .occupancy-grid,
+    .architecture-grid,
+    .revenue-grid,
+    .media-grid,
+    .investment-grid,
+    .table-grid {
+      display: grid;
+      gap: 1.1rem;
+    }
+
+    .overview-grid {
+      grid-template-columns: 1.2fr 1fr;
+    }
+
+    .timeline-grid,
+    .meta-grid,
+    .ring-grid,
+    .video-grid,
+    .insight-kpi-grid {
+      display: grid;
+      gap: 1rem;
+    }
+
+    .timeline-grid {
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+    }
+
+    .meta-grid,
+    .video-grid,
+    .insight-kpi-grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .timeline-pill,
+    .meta-pill,
+    .effort-item,
+    .unit-badge,
+    .overview-stat {
+      border: 1px solid var(--surface-line);
+      background: linear-gradient(180deg, var(--gold-wash-04), transparent 70%), var(--card-bg);
+      border-radius: 1rem;
+      padding: 1rem 1.05rem;
+    }
+
+    .timeline-label,
+    .meta-label,
+    .overview-stat-label,
+    .ring-label,
+    .unit-type,
+    .video-meta,
+    .effort-index {
+      color: var(--text-muted);
+      font-size: 0.82rem;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+    }
+
+    .timeline-value,
+    .meta-value,
+    .overview-stat-value {
+      margin-top: 0.35rem;
+      font-size: 1.05rem;
+      font-weight: 700;
+      line-height: 1.45;
+    }
+
+    .overview-stat {
+      display: flex;
+      align-items: end;
+      justify-content: space-between;
+      gap: 1rem;
+    }
+
+    .occupancy-grid,
+    .revenue-grid,
+    .investment-grid {
+      grid-template-columns: 1.1fr 0.9fr;
+      align-items: start;
+    }
+
+    .occupancy-kpi-grid,
+    .revenue-kpi-grid,
+    .marketing-kpi-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 1rem;
+    }
+
+    .marketing-kpi-grid {
+      margin-top: 0.3rem;
+    }
+
+    .premium-kpi {
+      border: 1px solid var(--surface-line);
+      background:
+        linear-gradient(180deg, var(--gold-wash-06), transparent 55%),
+        var(--card-bg);
+      border-radius: 1.15rem;
+      padding: 1.15rem;
+      min-height: 150px;
+    }
+
+    .premium-kpi-label {
+      color: var(--text-muted);
+      font-size: 0.82rem;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+    }
+
+    .premium-kpi-value {
+      margin-top: 0.85rem;
+      font-family: var(--font-mono);
+      font-size: clamp(1.6rem, 2.5vw, 2.35rem);
+      font-weight: 700;
+      color: var(--gold-light);
+      line-height: 1.05;
+    }
+
+    .premium-kpi-subvalue {
+      margin-top: 0.55rem;
+      color: var(--text-primary);
+      font-size: 1rem;
+    }
+
+    .ring-grid {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+
+    .ring-card {
+      border: 1px solid var(--surface-line);
+      border-radius: 1.2rem;
+      background: linear-gradient(180deg, var(--gold-wash-03), transparent 70%), var(--card-bg);
+      padding: 1.2rem 1rem;
+      text-align: center;
+    }
+
+    .progress-ring {
+      --progress: 0.5;
+      width: 132px;
+      height: 132px;
+      margin: 0 auto 0.85rem;
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+      background:
+        radial-gradient(circle, var(--card-bg) 58%, transparent 60%),
+        conic-gradient(var(--gold) calc(var(--progress) * 1turn), rgba(245,237,224,0.08) 0);
+      box-shadow: inset 0 0 0 1px rgba(201,169,110,0.08);
+    }
+
+    .progress-ring span {
+      font-family: var(--font-mono);
+      font-size: 1.4rem;
+      font-weight: 700;
+      color: var(--gold-light);
+    }
+
+    .accordion-shell {
+      border: 1px solid var(--surface-line);
+      border-radius: 1.05rem;
+      overflow: hidden;
+      background: linear-gradient(180deg, var(--gold-wash-025), transparent 68%), var(--card-bg);
+    }
+
+    .accordion-shell summary {
+      list-style: none;
+      cursor: pointer;
+      padding: 1rem 1.15rem;
+      font-weight: 700;
+    }
+
+    .accordion-shell summary::-webkit-details-marker {
+      display: none;
+    }
+
+    .accordion-body {
+      padding: 0 1.15rem 1.05rem;
+      color: var(--text-muted);
+    }
+
+    .floor-stack {
+      display: grid;
+      gap: 1rem;
+    }
+
+    .floor-card {
+      border: 1px solid var(--surface-line);
+      border-radius: 1.2rem;
+      background:
+        linear-gradient(180deg, var(--gold-wash-04), transparent 70%),
+        var(--card-bg);
+      padding: 1.15rem;
+    }
+
+    .floor-head {
+      display: flex;
+      align-items: start;
+      justify-content: space-between;
+      gap: 1rem;
+      margin-bottom: 0.95rem;
+    }
+
+    .floor-title {
+      margin: 0;
+      font-size: 1.2rem;
+    }
+
+    .floor-status {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.45rem 0.8rem;
+      border-radius: 999px;
+      border: 1px solid var(--surface-line);
+      background: var(--gold-wash-04);
+      color: var(--gold-light);
+      font-family: var(--font-mono);
+      font-size: 0.9rem;
+    }
+
+    .unit-grid {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 0.75rem;
+    }
+
+    .unit-badge {
+      padding: 0.85rem 0.8rem;
+    }
+
+    .unit-id {
+      font-family: var(--font-mono);
+      font-size: 0.92rem;
+      color: var(--text-primary);
+    }
+
+    .unit-badge.occupied {
+      border-color: rgba(201,169,110,0.28);
+    }
+
+    .unit-badge.vacant {
+      border-color: rgba(252,165,165,0.22);
+      background: linear-gradient(180deg, rgba(252,165,165,0.06), transparent 70%), var(--card-bg);
+    }
+
+    .floor-note {
+      margin: 0.85rem 0 0;
+      color: var(--text-muted);
+      font-size: 0.9rem;
+    }
+
+    .footer-stat-row {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 1rem;
+    }
+
+    .hero-kpi {
+      border: 1px solid var(--surface-line-strong);
+      border-radius: 1.25rem;
+      padding: 1.3rem;
+      background:
+        linear-gradient(135deg, rgba(201,169,110,0.16), transparent 55%),
+        var(--card-bg);
+    }
+
+    .hero-kpi .premium-kpi-value {
+      font-size: clamp(2rem, 4vw, 3.1rem);
+    }
+
+    .mini-table {
+      width: 100%;
+      min-width: 0;
+    }
+
+    .mini-table th,
+    .mini-table td {
+      padding: 0.8rem 0.85rem;
+    }
+
+    .progress-shell {
+      border: 1px solid var(--surface-line);
+      border-radius: 1.2rem;
+      padding: 1.2rem;
+      background:
+        linear-gradient(180deg, rgba(201,169,110,0.08), transparent 70%),
+        var(--card-bg);
+    }
+
+    .progress-track-lg {
+      height: 14px;
+      border-radius: 999px;
+      background: rgba(245,237,224,0.08);
+      overflow: hidden;
+      margin: 1rem 0 0.9rem;
+    }
+
+    .progress-fill-lg {
+      height: 100%;
+      border-radius: inherit;
+      background: linear-gradient(90deg, var(--gold-dim), var(--gold-light));
+      box-shadow: 0 0 24px rgba(201,169,110,0.24);
+    }
+
+    .progress-meta {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      color: var(--text-muted);
+      font-size: 0.95rem;
+    }
+
+    .highlight-row td {
+      background: rgba(201,169,110,0.12);
+      color: var(--gold-light);
+      font-weight: 700;
+    }
+
+    .effort-list {
+      display: grid;
+      gap: 0.85rem;
+    }
+
+    .effort-item {
+      display: grid;
+      grid-template-columns: auto 1fr;
+      align-items: start;
+      gap: 0.9rem;
+    }
+
+    .effort-index {
+      width: 2rem;
+      height: 2rem;
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+      background: var(--gold-wash-10);
+      color: var(--gold-light);
+      border: 1px solid var(--surface-line);
+      font-weight: 800;
+    }
+
+    .video-card-link {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .embed-shell {
+      position: relative;
+      aspect-ratio: 16 / 9;
+      border-radius: 1rem;
+      overflow: hidden;
+      border: 1px solid var(--surface-line);
+      background:
+        radial-gradient(circle at top, rgba(201,169,110,0.12), transparent 50%),
+        #120d08;
+    }
+
+    .embed-shell iframe {
+      width: 100%;
+      height: 100%;
+      border: 0;
+    }
+
+    .embed-fallback {
+      position: absolute;
+      inset: 0;
+      display: grid;
+      place-items: center;
+      background: linear-gradient(180deg, rgba(15,10,6,0.2), rgba(15,10,6,0.8));
+      color: var(--gold-light);
+      text-align: center;
+      padding: 1rem;
+    }
+
+    .play-overlay {
+      position: absolute;
+      inset: auto 1rem 1rem auto;
+      width: 3rem;
+      height: 3rem;
+      border-radius: 50%;
+      border: 1px solid rgba(201,169,110,0.4);
+      background: rgba(15,10,6,0.82);
+      display: grid;
+      place-items: center;
+      color: var(--gold-light);
+      font-size: 1.1rem;
+      pointer-events: none;
+    }
+
+    .tiktok-shell .card-core {
+      background:
+        linear-gradient(180deg, rgba(18,12,20,0.92), rgba(11,8,14,0.98)),
+        var(--card-bg);
+      border: 1px solid rgba(201,169,110,0.16);
+    }
+
+    .tiktok-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 1rem;
+    }
+
+    .tiktok-card .card-core {
+      background:
+        linear-gradient(180deg, rgba(36,20,45,0.85), rgba(18,10,22,0.98)),
+        var(--card-bg);
+    }
+
+    .investment-grid {
+      align-items: stretch;
+    }
+
+    .donut-shell {
+      max-width: 360px;
+      margin-inline: auto;
+    }
+
+    .insight-kpi-grid .premium-kpi {
+      min-height: 0;
+    }
+
     @media (max-width: 1024px) {
       .hero-grid,
       .gap-grid,
       .cost-grid,
       .charts-grid,
       .insights-grid,
-      .footer-grid {
+      .footer-grid,
+      .overview-grid,
+      .occupancy-grid,
+      .revenue-grid,
+      .investment-grid {
         grid-template-columns: 1fr;
+      }
+
+      .timeline-grid,
+      .ring-grid,
+      .footer-stat-row,
+      .occupancy-kpi-grid,
+      .revenue-kpi-grid,
+      .marketing-kpi-grid,
+      .unit-grid,
+      .tiktok-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
       }
 
       .section-note {
@@ -1060,6 +1542,20 @@
         font-size: 0.9rem;
       }
 
+      .timeline-grid,
+      .meta-grid,
+      .ring-grid,
+      .footer-stat-row,
+      .video-grid,
+      .tiktok-grid,
+      .insight-kpi-grid,
+      .occupancy-kpi-grid,
+      .revenue-kpi-grid,
+      .marketing-kpi-grid,
+      .unit-grid {
+        grid-template-columns: 1fr;
+      }
+
       .section-header,
       .branch-header,
       .gauge-topline,
@@ -1073,6 +1569,15 @@
 
       .branch-meta {
         text-align: start;
+      }
+
+      .progress-meta,
+      .overview-stat,
+      .floor-head,
+      .effort-item {
+        grid-template-columns: 1fr;
+        flex-direction: column;
+        align-items: start;
       }
     }
 
@@ -1199,6 +1704,161 @@
         totalCommission: 121202,
         totalCosts: 267600,
         operationalGap: -146398
+      },
+      executiveSummary: {
+        title: { ar: "الموجز التنفيذي", en: "Executive Summary" },
+        body: {
+          ar: "يوثّق هذا التقرير الأداء الكامل لإدارة مثوى لمبنى مثوى 43 في حي التعاون خلال فترة العقد. يشمل نتائج الإشغال والإيرادات المحصّلة وأنشطة التسويق.\n\nوالأهم من ذلك، يتضمن تفصيلاً شفافاً للاستثمارات الحقيقية التي قدّمناها نيابةً عن هذا العقار، مع إثبات واضح أن نسبة 7% الحالية تُوقع علينا خسائر فعلية.\n\nهدفنا تقديم حجة واضحة لتعديل شروط العقد: 15% بأثر رجعي على السنة الأولى كحد أدنى لتغطية تكاليفنا، و20% للعقد الجديد لضمان استدامة الشراكة.",
+          en: "This report documents Mathwa's full operating performance for Mathwa 43 in Al Taawun during the contract term. It covers occupancy outcomes, collected revenue, and marketing activity.\n\nMost importantly, it transparently details the real investments we carried on behalf of this asset, with clear proof that the current 7% fee leaves us with real losses.\n\nOur goal is to present a clear contractual case: 15% applied retroactively to the first year as a minimum cost-recovery threshold, and 20% in the renewed agreement to keep the partnership sustainable."
+        }
+      },
+      buildingOverview: {
+        title: { ar: "نظرة عامة على المبنى", en: "Building Overview" },
+        subtitle: { ar: "إطار العقد، البيانات الأساسية، وإحصاءات الأصل", en: "Contract timeline, property metadata, and building statistics" },
+        timeline: [
+          { label: { ar: "بداية العقد", en: "Contract Start" }, value: { ar: "يونيو 2025", en: "June 2025" } },
+          { label: { ar: "ذروة الإشغال", en: "Peak Occupancy" }, value: { ar: "ديسمبر 2025", en: "December 2025" } },
+          { label: { ar: "هذا التقرير", en: "This Report" }, value: { ar: "أبريل 2026", en: "April 2026" } },
+          { label: { ar: "انتهاء العقد", en: "Contract End" }, value: { ar: "يونيو 2026", en: "June 2026" } }
+        ],
+        metadata: [
+          { label: { ar: "اسم المشروع", en: "Project Name" }, value: { ar: "مثوى 43", en: "Mathwa 43" } },
+          { label: { ar: "نوع الأصل", en: "Asset Type" }, value: { ar: "مبنى سكني", en: "Residential Building" } },
+          { label: { ar: "إجمالي الوحدات", en: "Total Units" }, value: "20" },
+          { label: { ar: "الموقع", en: "Location" }, value: { ar: "حي التعاون، الرياض، المملكة العربية السعودية", en: "Al Taawun District, Riyadh, Saudi Arabia" } }
+        ]
+      },
+      occupancy: {
+        title: { ar: "أداء الإشغال", en: "Occupancy Performance" },
+        subtitle: { ar: "مستوى الإشغال، الذروة، وتوزيع الأداء الشهري", en: "Occupancy level, peak performance, and monthly distribution" },
+        kpis: [
+          { label: { ar: "إشغال أبريل 2026", en: "April 2026 Occupancy" }, value: "19/20", subvalue: "95%" },
+          { label: { ar: "متوسط الإشغال", en: "Average Occupancy" }, value: "88%", subvalue: null },
+          { label: { ar: "ذروة الإشغال", en: "Peak Occupancy" }, value: "98.7%", subvalue: null }
+        ],
+        rings: [
+          { label: { ar: "أبريل 2026", en: "April 2026" }, value: 0.95 },
+          { label: { ar: "متوسط الإشغال", en: "Average Occupancy" }, value: 0.90 },
+          { label: { ar: "ذروة الإشغال", en: "Peak Occupancy" }, value: 1 }
+        ],
+        monthly: [
+          { label: "Jun 25", value: 0.50 },
+          { label: "Jul 25", value: 0.70 },
+          { label: "Sep 25", value: 0.70 },
+          { label: "Nov 25", value: 0.90 },
+          { label: "Dec 25", value: 1.00 },
+          { label: "Jan 26", value: 0.90 },
+          { label: "Feb 26", value: 0.85 },
+          { label: "Mar 26", value: 0.87 },
+          { label: "Apr 26", value: 0.95 }
+        ],
+        accordionTitle: { ar: "حالة الوحدات في أبريل 2026", en: "Unit Status in April 2026" },
+        accordionBody: { ar: "19 من 20 وحدة مشغولة", en: "19 of 20 units occupied" }
+      },
+      architecture: {
+        title: { ar: "التوزيع المعماري للوحدات", en: "Architectural Unit Distribution" },
+        subtitle: { ar: "قراءة بصرية لتوزيع الوحدات حسب الأدوار ونسب الإشغال", en: "Visual reading of floor-by-floor unit mix and occupancy" },
+        floors: [
+          { name: { ar: "الدور الثالث", en: "Third Floor" }, occupied: 4, total: 4, units: ["43-317", "43-318", "43-319", "43-320"], type: "1BR" },
+          { name: { ar: "الدور الثاني", en: "Second Floor" }, occupied: 6, total: 6, units: ["43-211", "43-212", "43-213", "43-214", "43-215", "43-216"], type: "1BR" },
+          { name: { ar: "الدور الأول", en: "First Floor" }, occupied: 5, total: 6, units: ["43-105", "43-106", "43-107", "43-108", "43-109", "43-110"], type: "1BR", note: { ar: "تم توثيق 5 من 6 وحدات كمشغولة دون تحديد الوحدة الشاغرة بالاسم.", en: "5 of 6 units are confirmed occupied; the vacant unit was not named in the supplied brief." } },
+          { name: { ar: "الدور الأرضي", en: "Ground Floor" }, occupied: 4, total: 4, units: ["43-001", "43-002", "43-003", "43-004"], type: "2BR" }
+        ],
+        footer: [
+          { label: { ar: "الأرضي", en: "Ground" }, value: "4 x 2BR" },
+          { label: { ar: "الأدوار 1-3", en: "Floors 1-3" }, value: "16 x 1BR" },
+          { label: { ar: "الإشغال", en: "Occupancy" }, value: "95%" }
+        ]
+      },
+      revenuePerformance: {
+        title: { ar: "أداء الإيرادات", en: "Revenue Performance" },
+        subtitle: { ar: "الإيراد المحصل، أفضل شهر، وحصة مثوى الحالية", en: "Collected revenue, best month, and current Mathwa share" },
+        mainRevenue: 1294857,
+        mainRevenueLabel: { ar: "الإيراد المحصل (10.5 شهر)", en: "Collected Revenue (10.5 months)" },
+        bestMonth: { value: 165817, month: "Nov 25" },
+        currentShare: 87252,
+        tableGroups: [
+          { label: { ar: "إجمالي الإيرادات", en: "Total Revenue" }, rows: [ { name: "Actual", value: 1294857 }, { name: "Expected April 2026", value: 500000 }, { name: "Total Expected", value: 1794857 } ] },
+          { label: { ar: "حصة مثوى", en: "Mathwa Share" }, rows: [ { name: "Actual", value: 87252 }, { name: "Expected", value: 33950 }, { name: "Total", value: 121202 } ] }
+        ],
+        monthlyKnown: [
+          { label: "Nov 25", value: 165817 },
+          { label: "10.5M Actual", value: 1294857 },
+          { label: "Q2 2026 Expected", value: 500000 },
+          { label: "Expected Total", value: 1794857 }
+        ]
+      },
+      contractProgress: {
+        title: { ar: "مسار الإيرادات حتى نهاية العقد", en: "Revenue Path to Contract End" },
+        progress: 0.72,
+        body: { ar: "المحقق 1,294,857 ريال من 1,794,857 ريال (التوقع النهائي)", en: "SAR 1,294,857 achieved out of SAR 1,794,857 (final projection)" },
+        footer: { ar: "متوقع بنهاية يونيو 2026", en: "Expected by end of June 2026" }
+      },
+      feeSchedule: {
+        title: { ar: "جدول الرسوم المتدرجة (الملحق 1)", en: "Tiered Fee Schedule (Annex 1)" },
+        rows: [
+          ["1,600,000", "5%"], ["1,700,000", "5.5%"], ["1,800,000", "7%"], ["1,900,000", "9%"], ["2,000,000", "11%"],
+          ["2,100,000", "13%"], ["2,200,000", "15%"], ["2,300,000", "17%"], ["2,400,000", "19%"], ["2,500,000", "20%"],
+          ["2,600,000", "21%"], ["2,700,000", "22%"], ["2,800,000", "23%"], ["2,900,000", "24%"], ["Above 2,900,001", "25%"]
+        ],
+        currentFee: "7%"
+      },
+      marketing: {
+        title: { ar: "جهود التسويق", en: "Marketing Efforts" },
+        subtitle: { ar: "الإنفاق، الحجوزات، والجهود البيعية الداعمة للإشغال", en: "Spend, bookings, and sales-driven demand generation" },
+        kpis: [
+          { label: { ar: "إنفاق إعلاني", en: "Ad Spend" }, value: 4594, suffix: "SAR" },
+          { label: { ar: "حجوزات من الإعلانات", en: "Bookings from Ads" }, value: 8 },
+          { label: { ar: "مشاهدات TikTok", en: "TikTok Views" }, value: "186,000+" }
+        ],
+        efforts: [
+          { ar: "إدراج بيوت مع تصوير احترافي", en: "Bayut listing with professional photography" },
+          { ar: "حملات TikTok و Meta", en: "TikTok and Meta campaigns" },
+          { ar: "نظام متابعة واتساب", en: "WhatsApp follow-up system" },
+          { ar: "B2B Sales Efforts", en: "B2B sales efforts" }
+        ]
+      },
+      campaignVideos: {
+        title: { ar: "الفيديوهات الإعلانية", en: "Campaign Videos" },
+        videos: [
+          { title: { ar: "حملة إعلانية 1", en: "Campaign Video 1" }, url: "https://drive.google.com/file/d/1mr9KfWvQRyPfr7YnfG0QlomN3MaCijZO/view" },
+          { title: { ar: "حملة إعلانية 2", en: "Campaign Video 2" }, url: "https://drive.google.com/file/d/1hVMurMw45rvpCkCq7G-hd0jv4OwKDavt/view" }
+        ]
+      },
+      tiktok: {
+        title: { ar: "أداء TikTok العضوي", en: "TikTok Organic Performance" },
+        subtitle: { ar: "@mathwaa_ — مشاهدات عضوية لهذا العقار", en: "@mathwaa_ — Organic views for this property" },
+        views: "186,000+",
+        videos: [
+          "https://www.tiktok.com/@mathwaa_/video/7558385914964151570",
+          "https://www.tiktok.com/@mathwaa_/video/7558384482475166983",
+          "https://www.tiktok.com/@mathwaa_/video/7558383550630808839",
+          "https://www.tiktok.com/@mathwaa_/video/7558380776576847122"
+        ]
+      },
+      investment: {
+        title: { ar: "استثمارنا في هذا العقار", en: "Our Investment in This Asset" },
+        total: 267600,
+        subtitle: { ar: "إجمالي استثمار مثوى في هذا العقار", en: "Total Mathwa investment in this property" },
+        cards: [
+          { label: { ar: "Direct Costs", en: "Direct Costs" }, value: 117600, ratio: "44%" },
+          { label: { ar: "Indirect Costs", en: "Indirect Costs" }, value: 150000, ratio: "56%" },
+          { label: { ar: "ROI", en: "ROI" }, value: "4.8x" },
+          { label: { ar: "Cost Ratio", en: "Cost Ratio" }, value: "15%" }
+        ]
+      },
+      keyInsights: {
+        title: { ar: "الرؤى الأساسية", en: "Key Insights" },
+        subtitle: { ar: "الإشغال، الإيراد، الاستثمار، وقيمة الإشغال الكامل", en: "Occupancy, revenue, investment, and full occupancy value" },
+        cards: [
+          { badge: { ar: "الإشغال", en: "Occupancy" }, title: { ar: "نسبة تشغيل مستقرة", en: "Stable occupancy base" }, body: { ar: "إشغال أبريل 2026 بلغ 95% مع متوسط أداء 88% وذروة تشغيل 98.7%.", en: "April 2026 occupancy reached 95%, with an 88% average and a 98.7% peak." }, tone: "gold" },
+          { badge: { ar: "الإيرادات", en: "Revenue" }, title: { ar: "إيراد قوي لكن دون غطاء تعاقدي كافٍ", en: "Strong revenue, insufficient fee coverage" }, body: { ar: "تم تحصيل 1,294,857 ريال خلال 10.5 أشهر، لكن حصة 7% الحالية لا تغطي الاستثمار التشغيلي الفعلي.", en: "SAR 1,294,857 was collected in 10.5 months, but the current 7% fee does not cover the true operating investment." }, tone: "warning" },
+          { badge: { ar: "الاستثمار", en: "Investment" }, title: { ar: "استثمار مثوى موثق بالكامل", en: "Mathwa investment is fully documented" }, body: { ar: "إجمالي التكاليف المباشرة وغير المباشرة بلغ 267,600 ريال بنسبة 15% من صافي الإيراد.", en: "Direct and indirect costs total SAR 267,600, equal to 15% of net revenue." }, tone: "danger" },
+          { badge: { ar: "Full Occupancy", en: "Full Occupancy" }, title: { ar: "قيمة الإشغال الكامل", en: "Full occupancy value" }, body: { ar: "قيمة الإشغال الكامل 2,055,889 ريال مقابل 1,294,857 ريال فعلياً بنسبة تحقيق 63%.", en: "Full occupancy value is SAR 2,055,889 versus SAR 1,294,857 actual, an achievement rate of 63%." }, tone: "gold" }
+        ],
+        fullOccupancy: 2055889,
+        actual: 1294857,
+        achievement: 0.63
       }
     };
 
@@ -1532,6 +2192,13 @@
       return DATA.copy[state.lang];
     }
 
+    function localize(value) {
+      if (value && typeof value === "object" && !Array.isArray(value) && Object.prototype.hasOwnProperty.call(value, state.lang)) {
+        return value[state.lang];
+      }
+      return value;
+    }
+
     function getBranchGap(branch) {
       return branch.commissionTotal - branch.totalCosts;
     }
@@ -1852,6 +2519,403 @@
         '</section>';
     }
 
+    function formatPlainValue(value) {
+      if (typeof value === "number") {
+        return formatNumber(value);
+      }
+      return String(value);
+    }
+
+    function getDriveEmbedUrl(url) {
+      const match = url.match(/\/d\/([^/]+)/);
+      return match ? "https://drive.google.com/file/d/" + match[1] + "/preview" : url;
+    }
+
+    function getTikTokEmbedUrl(url) {
+      const match = url.match(/\/video\/(\d+)/);
+      return match ? "https://www.tiktok.com/embed/v3/" + match[1] : url;
+    }
+
+    function buildExecutiveSummarySection() {
+      const section = DATA.executiveSummary;
+      return '' +
+        '<section>' +
+          buildSectionHeader(localize(section.title), localize(section.title), "") +
+          '<article class="card-shell statement-card reveal">' +
+            '<div class="card-core">' +
+              '<h3 class="statement-title">' + escapeHtml(localize(section.title)) + '</h3>' +
+              '<p class="statement-body">' + escapeHtml(localize(section.body)) + '</p>' +
+            '</div>' +
+          '</article>' +
+        '</section>';
+    }
+
+    function buildBuildingOverviewSection() {
+      const section = DATA.buildingOverview;
+      return '' +
+        '<section>' +
+          buildSectionHeader(localize(section.title), localize(section.subtitle), "") +
+          '<div class="overview-grid">' +
+            '<article class="card-shell overview-card reveal">' +
+              '<div class="card-core">' +
+                '<div class="timeline-grid stagger-grid">' +
+                  section.timeline.map(function (item) {
+                    return '' +
+                      '<div class="timeline-pill">' +
+                        '<div class="timeline-label">' + escapeHtml(localize(item.label)) + '</div>' +
+                        '<div class="timeline-value">' + escapeHtml(localize(item.value)) + '</div>' +
+                      '</div>';
+                  }).join("") +
+                '</div>' +
+              '</div>' +
+            '</article>' +
+            '<article class="card-shell overview-card reveal">' +
+              '<div class="card-core">' +
+                '<div class="meta-grid">' +
+                  section.metadata.map(function (item) {
+                    return '' +
+                      '<div class="meta-pill">' +
+                        '<div class="meta-label">' + escapeHtml(localize(item.label)) + '</div>' +
+                        '<div class="meta-value">' + escapeHtml(localize(item.value)) + '</div>' +
+                      '</div>';
+                  }).join("") +
+                '</div>' +
+              '</div>' +
+            '</article>' +
+          '</div>' +
+        '</section>';
+    }
+
+    function buildOccupancySection() {
+      const section = DATA.occupancy;
+      return '' +
+        '<section>' +
+          buildSectionHeader(localize(section.title), localize(section.subtitle), "") +
+          '<div class="occupancy-grid">' +
+            '<article class="card-shell occupancy-card reveal">' +
+              '<div class="card-core">' +
+                '<div class="occupancy-kpi-grid stagger-grid">' +
+                  section.kpis.map(function (item) {
+                    return '' +
+                      '<div class="premium-kpi">' +
+                        '<div class="premium-kpi-label">' + escapeHtml(localize(item.label)) + '</div>' +
+                        '<div class="premium-kpi-value">' + escapeHtml(item.value) + '</div>' +
+                        (item.subvalue ? '<div class="premium-kpi-subvalue">' + escapeHtml(item.subvalue) + '</div>' : '') +
+                      '</div>';
+                  }).join("") +
+                '</div>' +
+                '<div class="chart-stage screen-only"><canvas id="occupancyMonthlyChart"></canvas></div>' +
+                '<details class="accordion-shell">' +
+                  '<summary>' + escapeHtml(localize(section.accordionTitle)) + '</summary>' +
+                  '<div class="accordion-body">' + escapeHtml(localize(section.accordionBody)) + '</div>' +
+                '</details>' +
+              '</div>' +
+            '</article>' +
+            '<article class="card-shell occupancy-card reveal">' +
+              '<div class="card-core">' +
+                '<div class="ring-grid stagger-grid">' +
+                  section.rings.map(function (item) {
+                    return '' +
+                      '<div class="ring-card">' +
+                        '<div class="progress-ring" style="--progress:' + item.value + ';">' +
+                          '<span>' + formatPercent(item.value) + '</span>' +
+                        '</div>' +
+                        '<div class="ring-label">' + escapeHtml(localize(item.label)) + '</div>' +
+                      '</div>';
+                  }).join("") +
+                '</div>' +
+              '</div>' +
+            '</article>' +
+          '</div>' +
+        '</section>';
+    }
+
+    function buildArchitectureSection() {
+      const section = DATA.architecture;
+      return '' +
+        '<section>' +
+          buildSectionHeader(localize(section.title), localize(section.subtitle), "") +
+          '<article class="card-shell architectural-card reveal">' +
+            '<div class="card-core">' +
+              '<div class="floor-stack">' +
+                section.floors.map(function (floor) {
+                  return '' +
+                    '<div class="floor-card">' +
+                      '<div class="floor-head">' +
+                        '<div>' +
+                          '<h3 class="floor-title">' + escapeHtml(localize(floor.name)) + '</h3>' +
+                        '</div>' +
+                        '<div class="floor-status">' + formatNumber(floor.occupied) + '/' + formatNumber(floor.total) + '</div>' +
+                      '</div>' +
+                      '<div class="unit-grid">' +
+                        floor.units.map(function (unit) {
+                          return '' +
+                            '<div class="unit-badge occupied">' +
+                              '<div class="unit-id">' + escapeHtml(unit) + '</div>' +
+                              '<div class="unit-type">' + escapeHtml(floor.type) + '</div>' +
+                            '</div>';
+                        }).join("") +
+                      '</div>' +
+                      (floor.note ? '<p class="floor-note">' + escapeHtml(localize(floor.note)) + '</p>' : '') +
+                    '</div>';
+                }).join("") +
+              '</div>' +
+              '<div class="footer-stat-row">' +
+                section.footer.map(function (item) {
+                  return '' +
+                    '<div class="overview-stat">' +
+                      '<div>' +
+                        '<div class="overview-stat-label">' + escapeHtml(localize(item.label)) + '</div>' +
+                        '<div class="overview-stat-value">' + escapeHtml(item.value) + '</div>' +
+                      '</div>' +
+                    '</div>';
+                }).join("") +
+              '</div>' +
+            '</div>' +
+          '</article>' +
+        '</section>';
+    }
+
+    function buildRevenuePerformanceSection() {
+      const section = DATA.revenuePerformance;
+      return '' +
+        '<section>' +
+          buildSectionHeader(localize(section.title), localize(section.subtitle), "") +
+          '<div class="revenue-grid">' +
+            '<article class="card-shell revenue-card reveal">' +
+              '<div class="card-core">' +
+                '<div class="hero-kpi">' +
+                  '<div class="premium-kpi-label">' + escapeHtml(localize(section.mainRevenueLabel)) + '</div>' +
+                  '<div class="premium-kpi-value">' + countMarkup(section.mainRevenue, "currency") + '</div>' +
+                '</div>' +
+                '<div class="revenue-kpi-grid">' +
+                  '<div class="premium-kpi">' +
+                    '<div class="premium-kpi-label">' + escapeHtml(state.lang === "ar" ? "أفضل شهر" : "Best Month") + '</div>' +
+                    '<div class="premium-kpi-value">' + countMarkup(section.bestMonth.value, "currency") + '</div>' +
+                    '<div class="premium-kpi-subvalue">' + escapeHtml(section.bestMonth.month) + '</div>' +
+                  '</div>' +
+                  '<div class="premium-kpi">' +
+                    '<div class="premium-kpi-label">' + escapeHtml(state.lang === "ar" ? "حصة مثوى الحالية (7%)" : "Current Mathwa Share (7%)") + '</div>' +
+                    '<div class="premium-kpi-value">' + countMarkup(section.currentShare, "currency") + '</div>' +
+                  '</div>' +
+                  '<div class="premium-kpi">' +
+                    '<div class="premium-kpi-label">' + escapeHtml(state.lang === "ar" ? "الإيراد المتوقع الكلي" : "Total Expected Revenue") + '</div>' +
+                    '<div class="premium-kpi-value">' + countMarkup(DATA.headline.totalRevenue, "currency") + '</div>' +
+                  '</div>' +
+                '</div>' +
+                '<p class="chart-note">' + escapeHtml(state.lang === "ar" ? "الرسم التالي يعرض نقاط الإيراد المؤكدة المذكورة في الملخص المرسل." : "The chart below uses only the confirmed revenue markers stated in the supplied brief.") + '</p>' +
+                '<div class="chart-stage screen-only"><canvas id="revenueMonthlyChart"></canvas></div>' +
+              '</div>' +
+            '</article>' +
+            '<article class="card-shell revenue-card reveal">' +
+              '<div class="card-core">' +
+                section.tableGroups.map(function (group) {
+                  return '' +
+                    '<div class="subtable">' +
+                      '<div class="subtable-head">' + escapeHtml(localize(group.label)) + '</div>' +
+                      '<table class="mini-table">' +
+                        '<tbody>' +
+                          group.rows.map(function (row) {
+                            return '' +
+                              '<tr>' +
+                                '<td>' + escapeHtml(row.name) + '</td>' +
+                                '<td class="mono">' + formatCurrency(row.value) + '</td>' +
+                              '</tr>';
+                          }).join("") +
+                        '</tbody>' +
+                      '</table>' +
+                    '</div>';
+                }).join("") +
+              '</div>' +
+            '</article>' +
+          '</div>' +
+        '</section>';
+    }
+
+    function buildContractProgressSection() {
+      const section = DATA.contractProgress;
+      return '' +
+        '<section>' +
+          buildSectionHeader(localize(section.title), formatPercent(section.progress), "") +
+          '<article class="card-shell progress-card reveal">' +
+            '<div class="card-core">' +
+              '<div class="progress-shell">' +
+                '<div class="premium-kpi-value">' + formatPercent(section.progress) + '</div>' +
+                '<p class="insight-body">' + escapeHtml(localize(section.body)) + '</p>' +
+                '<div class="progress-track-lg"><div class="progress-fill-lg" style="width:' + (section.progress * 100) + '%;"></div></div>' +
+                '<div class="progress-meta">' +
+                  '<span>' + escapeHtml(localize(section.footer)) + '</span>' +
+                  '<span class="mono">' + formatCurrency(DATA.branches[0].actualRevenue) + ' / ' + formatCurrency(DATA.branches[0].totalRevenue) + '</span>' +
+                '</div>' +
+              '</div>' +
+            '</div>' +
+          '</article>' +
+        '</section>';
+    }
+
+    function buildFeeScheduleSection() {
+      const section = DATA.feeSchedule;
+      return '' +
+        '<section>' +
+          buildSectionHeader(localize(section.title), "", "") +
+          '<article class="card-shell fee-card reveal">' +
+            '<div class="card-core">' +
+              '<div class="table-wrap">' +
+                '<table class="mini-table">' +
+                  '<thead><tr><th>' + escapeHtml(state.lang === "ar" ? "الإيراد" : "Revenue") + '</th><th>' + escapeHtml(state.lang === "ar" ? "الرسوم" : "Fee") + '</th></tr></thead>' +
+                  '<tbody>' +
+                    section.rows.map(function (row) {
+                      return '<tr class="' + (row[1] === section.currentFee ? 'highlight-row' : '') + '"><td class="mono">' + escapeHtml(row[0]) + '</td><td class="mono">' + escapeHtml(row[1]) + (row[1] === section.currentFee ? ' <span class="arrow-badge warning">' + escapeHtml(state.lang === "ar" ? "الحالي" : "Current") + '</span>' : '') + '</td></tr>';
+                    }).join("") +
+                  '</tbody>' +
+                '</table>' +
+              '</div>' +
+            '</div>' +
+          '</article>' +
+        '</section>';
+    }
+
+    function buildMarketingSection() {
+      const section = DATA.marketing;
+      return '' +
+        '<section>' +
+          buildSectionHeader(localize(section.title), localize(section.subtitle), "") +
+          '<div class="overview-grid">' +
+            '<article class="card-shell media-card reveal">' +
+              '<div class="card-core">' +
+                '<div class="marketing-kpi-grid">' +
+                  section.kpis.map(function (item) {
+                    const displayValue = typeof item.value === "number" && item.suffix === "SAR"
+                      ? formatCurrency(item.value)
+                      : escapeHtml(String(item.value));
+                    return '' +
+                      '<div class="premium-kpi">' +
+                        '<div class="premium-kpi-label">' + escapeHtml(localize(item.label)) + '</div>' +
+                        '<div class="premium-kpi-value">' + displayValue + '</div>' +
+                      '</div>';
+                  }).join("") +
+                '</div>' +
+              '</div>' +
+            '</article>' +
+            '<article class="card-shell media-card reveal">' +
+              '<div class="card-core">' +
+                '<div class="effort-list">' +
+                  section.efforts.map(function (item, index) {
+                    return '' +
+                      '<div class="effort-item">' +
+                        '<div class="effort-index">' + formatNumber(index + 1) + '</div>' +
+                        '<div>' + escapeHtml(localize(item)) + '</div>' +
+                      '</div>';
+                  }).join("") +
+                '</div>' +
+              '</div>' +
+            '</article>' +
+          '</div>' +
+        '</section>';
+    }
+
+    function buildCampaignVideosSection() {
+      const section = DATA.campaignVideos;
+      return '' +
+        '<section>' +
+          buildSectionHeader(localize(section.title), "", "") +
+          '<div class="video-grid">' +
+            section.videos.map(function (video) {
+              return '' +
+                '<article class="card-shell media-card reveal">' +
+                  '<div class="card-core">' +
+                    '<div class="embed-shell">' +
+                      '<div class="embed-fallback">' +
+                        '<div>' +
+                          '<div class="video-meta">Google Drive</div>' +
+                          '<div class="insight-title">' + escapeHtml(localize(video.title)) + '</div>' +
+                        '</div>' +
+                      '</div>' +
+                      '<div class="play-overlay">▶</div>' +
+                    '</div>' +
+                    '<h3 class="insight-title">' + escapeHtml(localize(video.title)) + '</h3>' +
+                    '<a class="video-card-link mono" href="' + escapeHtml(video.url) + '" target="_blank" rel="noreferrer">' + escapeHtml(state.lang === "ar" ? "فتح الفيديو" : "Open Video") + '</a>' +
+                  '</div>' +
+                '</article>';
+            }).join("") +
+          '</div>' +
+        '</section>';
+    }
+
+    function buildTikTokSection() {
+      const section = DATA.tiktok;
+      return '' +
+        '<section>' +
+          buildSectionHeader(localize(section.title), localize(section.subtitle), "") +
+          '<article class="card-shell tiktok-shell reveal">' +
+            '<div class="card-core">' +
+              '<div class="hero-kpi">' +
+                '<div class="premium-kpi-label">' + escapeHtml(state.lang === "ar" ? "مشاهدة" : "Views") + '</div>' +
+                '<div class="premium-kpi-value">' + escapeHtml(section.views) + '</div>' +
+              '</div>' +
+              '<div class="tiktok-grid">' +
+                section.videos.map(function (url, index) {
+                  return '' +
+                    '<article class="card-shell tiktok-card reveal">' +
+                      '<div class="card-core">' +
+                        '<div class="embed-shell">' +
+                          '<div class="embed-fallback">' +
+                            '<div>' +
+                              '<div class="video-meta">TikTok</div>' +
+                              '<div class="insight-title">@mathwaa_</div>' +
+                              '<div class="chart-note">' + escapeHtml(state.lang === "ar" ? "فيديو عضوي للعقار" : "Organic property video") + '</div>' +
+                            '</div>' +
+                          '</div>' +
+                          '<div class="play-overlay">▶</div>' +
+                        '</div>' +
+                        '<div class="video-meta">@mathwaa_</div>' +
+                        '<a class="video-card-link mono" href="' + escapeHtml(url) + '" target="_blank" rel="noreferrer">' + escapeHtml(state.lang === "ar" ? "مشاهدة على TikTok" : "View on TikTok") + '</a>' +
+                      '</div>' +
+                    '</article>';
+                }).join("") +
+              '</div>' +
+            '</div>' +
+          '</article>' +
+        '</section>';
+    }
+
+    function buildInvestmentSection() {
+      const section = DATA.investment;
+      return '' +
+        '<section>' +
+          buildSectionHeader(localize(section.title), localize(section.subtitle), "") +
+          '<div class="investment-grid">' +
+            '<article class="card-shell investment-card reveal">' +
+              '<div class="card-core">' +
+                '<div class="hero-kpi">' +
+                  '<div class="premium-kpi-label">' + escapeHtml(localize(section.subtitle)) + '</div>' +
+                  '<div class="premium-kpi-value">' + countMarkup(section.total, "currency") + '</div>' +
+                '</div>' +
+                '<div class="insight-kpi-grid">' +
+                  section.cards.map(function (item) {
+                    return '' +
+                      '<div class="premium-kpi">' +
+                        '<div class="premium-kpi-label">' + escapeHtml(localize(item.label)) + '</div>' +
+                        '<div class="premium-kpi-value">' + (typeof item.value === "number" ? formatCurrency(item.value) : escapeHtml(item.value)) + '</div>' +
+                        (item.ratio ? '<div class="premium-kpi-subvalue">' + escapeHtml(item.ratio) + '</div>' : '') +
+                      '</div>';
+                  }).join("") +
+                '</div>' +
+              '</div>' +
+            '</article>' +
+            '<article class="card-shell investment-card reveal">' +
+              '<div class="card-core">' +
+                '<div class="chart-stage donut-shell screen-only"><canvas id="investmentDonutChart"></canvas></div>' +
+                '<div class="print-only">' +
+                  '<div class="overview-stat"><div><div class="overview-stat-label">' + escapeHtml(state.lang === "ar" ? "Direct Costs" : "Direct Costs") + '</div><div class="overview-stat-value mono">' + formatCurrency(DATA.branches[0].directCosts.subtotal) + '</div></div></div>' +
+                  '<div class="overview-stat"><div><div class="overview-stat-label">' + escapeHtml(state.lang === "ar" ? "Indirect Costs" : "Indirect Costs") + '</div><div class="overview-stat-value mono">' + formatCurrency(DATA.branches[0].indirectCosts.subtotal) + '</div></div></div>' +
+                '</div>' +
+              '</div>' +
+            '</article>' +
+          '</div>' +
+        '</section>';
+    }
+
     function buildCostRows(items, subtotal, labels, copy) {
       const keys = Object.keys(items).filter(function (key) { return key !== "subtotal"; });
       const rows = keys.map(function (key) {
@@ -1920,19 +2984,25 @@
     }
 
     function buildInsightsSection(copy) {
+      const section = DATA.keyInsights;
       return '' +
         '<section>' +
-          buildSectionHeader(copy.sections.insightsTitle, copy.sections.insightsSubtitle, "") +
+          buildSectionHeader(localize(section.title), localize(section.subtitle), "") +
+          '<div class="insight-kpi-grid" style="margin-bottom:1rem;">' +
+            '<div class="premium-kpi reveal"><div class="premium-kpi-label">' + escapeHtml(state.lang === "ar" ? "Full Occupancy KPI" : "Full Occupancy KPI") + '</div><div class="premium-kpi-value">' + countMarkup(section.fullOccupancy, "currency") + '</div></div>' +
+            '<div class="premium-kpi reveal"><div class="premium-kpi-label">' + escapeHtml(state.lang === "ar" ? "Actual" : "Actual") + '</div><div class="premium-kpi-value">' + countMarkup(section.actual, "currency") + '</div></div>' +
+            '<div class="premium-kpi reveal"><div class="premium-kpi-label">' + escapeHtml(state.lang === "ar" ? "Achievement" : "Achievement") + '</div><div class="premium-kpi-value">' + countMarkup(section.achievement, "percent") + '</div></div>' +
+          '</div>' +
           '<div class="insights-grid stagger-grid">' +
-            copy.insights.map(function (item) {
+            section.cards.map(function (item) {
               return '' +
                 '<article class="card-shell insight-card reveal">' +
                   '<div class="card-core">' +
                     '<div class="card-badge-row">' +
-                      '<span class="card-badge ' + escapeHtml(item.tone) + '">' + escapeHtml(item.badge) + '</span>' +
+                      '<span class="card-badge ' + escapeHtml(item.tone) + '">' + escapeHtml(localize(item.badge)) + '</span>' +
                     '</div>' +
-                    '<h3 class="insight-title">' + escapeHtml(item.title) + '</h3>' +
-                    '<p class="insight-body">' + escapeHtml(item.body) + '</p>' +
+                    '<h3 class="insight-title">' + escapeHtml(localize(item.title)) + '</h3>' +
+                    '<p class="insight-body">' + escapeHtml(localize(item.body)) + '</p>' +
                   '</div>' +
                 '</article>';
             }).join("") +
@@ -1969,11 +3039,22 @@
       const html = '' +
         '<div class="page">' +
           buildHero(copy) +
+          buildExecutiveSummarySection() +
+          buildBuildingOverviewSection() +
+          buildOccupancySection() +
+          buildArchitectureSection() +
+          buildRevenuePerformanceSection() +
+          buildContractProgressSection() +
           buildGapSection(copy) +
           buildKpiSection(copy) +
           buildComparisonSection(copy) +
           buildChartsSection(copy) +
+          buildMarketingSection() +
+          buildCampaignVideosSection() +
+          buildTikTokSection() +
+          buildInvestmentSection() +
           buildCostSection(copy) +
+          buildFeeScheduleSection() +
           buildInsightsSection(copy) +
           buildFooter(copy) +
         '</div>';
@@ -2154,6 +3235,129 @@
                   }
                 }
               }
+            }
+          })
+        }));
+      }
+
+      const occupancyCtx = document.getElementById("occupancyMonthlyChart");
+      if (occupancyCtx) {
+        state.charts.push(new Chart(occupancyCtx, {
+          type: "bar",
+          data: {
+            labels: DATA.occupancy.monthly.map(function (item) { return item.label; }),
+            datasets: [
+              {
+                label: state.lang === "ar" ? "الإشغال الشهري" : "Monthly Occupancy",
+                data: DATA.occupancy.monthly.map(function (item) { return item.value * 100; }),
+                backgroundColor: DATA.occupancy.monthly.map(function (item) {
+                  if (item.value < 0.4) return getCssVar("--danger");
+                  if (item.value < 0.75) return "#7FB6E8";
+                  return getCssVar("--gold");
+                }),
+                borderRadius: 14
+              }
+            ]
+          },
+          options: Object.assign(baseChartOptions(), {
+            plugins: {
+              legend: { display: false },
+              tooltip: {
+                backgroundColor: getCssVar("--card-elevated"),
+                titleColor: getCssVar("--gold-light"),
+                bodyColor: getCssVar("--text-primary"),
+                borderColor: getCssVar("--surface-line-strong"),
+                borderWidth: 1,
+                callbacks: {
+                  label: function (context) {
+                    return context.dataset.label + ": " + context.parsed.y + "%";
+                  }
+                }
+              }
+            },
+            scales: {
+              x: {
+                grid: { display: false },
+                ticks: { color: chartLabelColor() }
+              },
+              y: {
+                beginAtZero: true,
+                max: 100,
+                grid: { color: "transparent" },
+                ticks: {
+                  color: chartLabelColor(),
+                  callback: function (value) { return value + "%"; }
+                }
+              }
+            }
+          })
+        }));
+      }
+
+      const revenueCtx = document.getElementById("revenueMonthlyChart");
+      if (revenueCtx) {
+        state.charts.push(new Chart(revenueCtx, {
+          type: "bar",
+          data: {
+            labels: DATA.revenuePerformance.monthlyKnown.map(function (item) { return item.label; }),
+            datasets: [
+              {
+                label: state.lang === "ar" ? "نقاط الإيراد المؤكدة" : "Confirmed Revenue Markers",
+                data: DATA.revenuePerformance.monthlyKnown.map(function (item) { return item.value; }),
+                backgroundColor: [
+                  getCssVar("--warning"),
+                  getCssVar("--gold"),
+                  getCssVar("--gold-dim"),
+                  getCssVar("--gold-light")
+                ],
+                borderRadius: 14
+              }
+            ]
+          },
+          options: Object.assign(baseChartOptions(), {
+            plugins: {
+              legend: { display: false },
+              tooltip: baseChartOptions().plugins.tooltip
+            },
+            scales: {
+              x: {
+                grid: { display: false },
+                ticks: { color: chartLabelColor() }
+              },
+              y: {
+                beginAtZero: true,
+                grid: { color: "transparent" },
+                ticks: {
+                  color: chartLabelColor(),
+                  callback: function (value) { return formatNumber(value); }
+                }
+              }
+            }
+          })
+        }));
+      }
+
+      const investmentCtx = document.getElementById("investmentDonutChart");
+      if (investmentCtx) {
+        state.charts.push(new Chart(investmentCtx, {
+          type: "doughnut",
+          data: {
+            labels: [copy.labels.directCosts, copy.labels.indirectCosts],
+            datasets: [
+              {
+                data: [DATA.branches[0].directCosts.subtotal, DATA.branches[0].indirectCosts.subtotal],
+                backgroundColor: [getCssVar("--gold"), getCssVar("--chart-indirect")],
+                borderColor: [getCssVar("--surface-line-strong"), getCssVar("--surface-line-strong")],
+                borderWidth: 1,
+                hoverOffset: 6
+              }
+            ]
+          },
+          options: Object.assign(baseChartOptions(), {
+            cutout: "68%",
+            plugins: {
+              legend: baseChartOptions().plugins.legend,
+              tooltip: baseChartOptions().plugins.tooltip
             }
           })
         }));
