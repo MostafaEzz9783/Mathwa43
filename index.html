@@ -2578,76 +2578,6 @@
         '</section>';
     }
 
-    function buildChartPrintTable(copy) {
-      return '' +
-        '<div class="print-only">' +
-          '<div class="table-wrap">' +
-            '<table>' +
-              '<thead>' +
-                '<tr>' +
-                  '<th>' + escapeHtml(copy.labels.branch) + '</th>' +
-                  '<th>' + escapeHtml(copy.labels.totalRevenue) + '</th>' +
-                  '<th>' + escapeHtml(copy.labels.totalDeductions) + '</th>' +
-                  '<th>' + escapeHtml(copy.labels.netRevenue) + '</th>' +
-                  '<th>' + escapeHtml(copy.labels.commissionAmount) + '</th>' +
-                  '<th>' + escapeHtml(copy.labels.totalCosts) + '</th>' +
-                  '<th>' + escapeHtml(copy.labels.directCosts) + '</th>' +
-                  '<th>' + escapeHtml(copy.labels.indirectCosts) + '</th>' +
-                  '<th>' + escapeHtml(copy.labels.netMargin) + '</th>' +
-                '</tr>' +
-              '</thead>' +
-              '<tbody>' +
-                DATA.branches.map(function (branch) {
-                  return '' +
-                    '<tr>' +
-                      '<td>' + escapeHtml(branch.name[state.lang]) + '</td>' +
-                      '<td class="mono">' + formatCurrency(branch.totalRevenue) + '</td>' +
-                      '<td class="mono">' + formatCurrency(branch.totalDeductions) + '</td>' +
-                      '<td class="mono">' + formatCurrency(branch.netRevenue) + '</td>' +
-                      '<td class="mono">' + formatCurrency(branch.commissionTotal) + '</td>' +
-                      '<td class="mono">' + formatCurrency(branch.totalCosts) + '</td>' +
-                      '<td class="mono">' + formatCurrency(branch.directCosts.subtotal) + '</td>' +
-                      '<td class="mono">' + formatCurrency(branch.indirectCosts.subtotal) + '</td>' +
-                      '<td class="mono">' + formatPercent(branch.netMargin) + '</td>' +
-                    '</tr>';
-                }).join("") +
-              '</tbody>' +
-            '</table>' +
-          '</div>' +
-          '<p class="chart-note">' + escapeHtml(copy.labels.printFallback) + '</p>' +
-        '</div>';
-    }
-
-    function buildChartsSection(copy) {
-      return '' +
-        '<section>' +
-          buildSectionHeader(copy.sections.chartsTitle, copy.sections.chartsSubtitle, "") +
-          '<div class="charts-grid">' +
-            '<div class="card-shell chart-card reveal">' +
-              '<div class="card-core">' +
-                '<div>' +
-                  '<h3 class="insight-title">' + escapeHtml(copy.labels.groupedBars) + '</h3>' +
-                  '<p class="chart-note">' + escapeHtml(copy.sections.gapSubtitle) + '</p>' +
-                '</div>' +
-                '<div class="chart-stage screen-only"><canvas id="commissionCostChart"></canvas></div>' +
-                '<p class="chart-fallback" id="chartFallbackA" hidden>Chart.js unavailable. Data remains available in the table below.</p>' +
-                buildChartPrintTable(copy) +
-              '</div>' +
-            '</div>' +
-            '<div class="card-shell chart-card reveal">' +
-              '<div class="card-core">' +
-                '<div>' +
-                  '<h3 class="insight-title">' + escapeHtml(copy.labels.stackedBars) + '</h3>' +
-                  '<p class="chart-note">' + escapeHtml(copy.labels.directVsIndirect) + '</p>' +
-                '</div>' +
-                '<div class="chart-stage screen-only"><canvas id="costBreakdownChart"></canvas></div>' +
-                '<p class="chart-fallback" id="chartFallbackB" hidden>Chart.js unavailable. Data remains available in the cost tables below.</p>' +
-                buildChartPrintTable(copy) +
-              '</div>' +
-          '</div>' +
-        '</section>';
-    }
-
     function formatPlainValue(value) {
       if (typeof value === "number") {
         return formatNumber(value);
@@ -3073,6 +3003,14 @@
         '</tr>';
     }
 
+    function buildTotalOnlyRow(label, total) {
+      return '' +
+        '<tr class="total-row">' +
+          '<td>' + escapeHtml(label) + '</td>' +
+          '<td class="mono">' + formatCurrency(total) + '</td>' +
+        '</tr>';
+    }
+
     function buildCostSection(copy) {
       return '' +
         '<section>' +
@@ -3099,7 +3037,7 @@
                     '<div class="subtable">' +
                       '<div class="subtable-head">' + escapeHtml(copy.labels.indirectCosts) + '</div>' +
                       '<table>' +
-                        '<tbody>' + buildCostRows(branch.indirectCosts, branch.indirectCosts.subtotal, copy.costItems, copy) + '</tbody>' +
+                        '<tbody>' + buildTotalOnlyRow(copy.labels.indirectCosts, branch.indirectCosts.subtotal) + '</tbody>' +
                       '</table>' +
                     '</div>' +
                     '<div class="cost-bridge">' +
@@ -3199,7 +3137,6 @@
           buildGapSection(copy) +
           buildKpiSection(copy) +
           buildComparisonSection(copy) +
-          buildChartsSection(copy) +
           buildMarketingSection() +
           buildCampaignVideosSection() +
           buildTikTokSection() +
@@ -3268,12 +3205,6 @@
       destroyCharts();
 
       if (!window.Chart) {
-        ["chartFallbackA", "chartFallbackB"].forEach(function (id) {
-          const node = document.getElementById(id);
-          if (node) {
-            node.hidden = false;
-          }
-        });
         return;
       }
 
@@ -3282,115 +3213,6 @@
       Chart.defaults.font.family = "Tajawal";
 
       const copy = getCopy();
-      const branchLabels = DATA.branches.map(function (branch) {
-        return branch.name[state.lang];
-      });
-
-      const commissionCostCtx = document.getElementById("commissionCostChart");
-      if (commissionCostCtx) {
-        state.charts.push(new Chart(commissionCostCtx, {
-          type: "bar",
-          data: {
-            labels: branchLabels,
-            datasets: [
-              {
-                label: copy.labels.totalRevenue,
-                data: DATA.branches.map(function (branch) { return branch.totalRevenue; }),
-                backgroundColor: getCssVar("--gold"),
-                borderRadius: 14
-              },
-              {
-                label: copy.labels.netRevenue,
-                data: DATA.branches.map(function (branch) { return branch.netRevenue; }),
-                backgroundColor: getCssVar("--gold-dim"),
-                borderRadius: 14
-              },
-              {
-                label: copy.labels.totalDeductions,
-                data: DATA.branches.map(function (branch) { return branch.totalDeductions; }),
-                backgroundColor: getCssVar("--danger-solid-soft"),
-                borderRadius: 14
-              }
-            ]
-          },
-          options: Object.assign(baseChartOptions(), {
-            scales: {
-              x: {
-                grid: {
-                  display: false
-                },
-                ticks: {
-                  color: chartLabelColor()
-                }
-              },
-              y: {
-                grid: {
-                  color: "transparent"
-                },
-                ticks: {
-                  color: chartLabelColor(),
-                  callback: function (value) {
-                    return formatNumber(value);
-                  }
-                }
-              }
-            }
-          })
-        }));
-      }
-
-      const costBreakdownCtx = document.getElementById("costBreakdownChart");
-      if (costBreakdownCtx) {
-        state.charts.push(new Chart(costBreakdownCtx, {
-          type: "bar",
-          data: {
-            labels: branchLabels,
-            datasets: [
-              {
-                label: copy.labels.directCosts,
-                data: DATA.branches.map(function (branch) { return branch.directCosts.subtotal; }),
-                backgroundColor: getCssVar("--gold-dim"),
-                borderRadius: 14,
-                stack: "costs"
-              },
-              {
-                label: copy.labels.indirectCosts,
-                data: DATA.branches.map(function (branch) { return branch.indirectCosts.subtotal; }),
-                backgroundColor: getCssVar("--chart-indirect"),
-                borderColor: getCssVar("--gold-light"),
-                borderWidth: 1,
-                borderRadius: 14,
-                stack: "costs"
-              }
-            ]
-          },
-          options: Object.assign(baseChartOptions(), {
-            scales: {
-              x: {
-                stacked: true,
-                grid: {
-                  display: false
-                },
-                ticks: {
-                  color: chartLabelColor()
-                }
-              },
-              y: {
-                stacked: true,
-                grid: {
-                  color: "transparent"
-                },
-                ticks: {
-                  color: chartLabelColor(),
-                  callback: function (value) {
-                    return formatNumber(value);
-                  }
-                }
-              }
-            }
-          })
-        }));
-      }
 
       const occupancyCtx = document.getElementById("occupancyMonthlyChart");
       if (occupancyCtx) {
