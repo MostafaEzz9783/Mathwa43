@@ -1324,6 +1324,13 @@
       text-decoration: none;
     }
 
+    .video-launch {
+      display: block;
+      color: inherit;
+      text-decoration: none;
+      cursor: pointer;
+    }
+
     .embed-shell {
       position: relative;
       aspect-ratio: 16 / 9;
@@ -1352,6 +1359,13 @@
       padding: 1rem;
     }
 
+    .embed-shell:hover .play-overlay,
+    .video-launch:hover .play-overlay {
+      transform: scale(1.06);
+      border-color: rgba(201,169,110,0.62);
+      box-shadow: 0 0 24px rgba(201,169,110,0.22);
+    }
+
     .play-overlay {
       position: absolute;
       inset: auto 1rem 1rem auto;
@@ -1365,6 +1379,116 @@
       color: var(--gold-light);
       font-size: 1.1rem;
       pointer-events: none;
+      transition:
+        transform 220ms var(--lux-ease),
+        border-color 220ms var(--lux-ease),
+        box-shadow 220ms var(--lux-ease);
+    }
+
+    .video-card-actions {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 0.9rem;
+      flex-wrap: wrap;
+    }
+
+    .video-action {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 42px;
+      padding: 0.72rem 1rem;
+      border-radius: 999px;
+      border: 1px solid var(--surface-line);
+      background: var(--gold-wash-04);
+      color: var(--gold-light);
+      font-family: var(--font-mono);
+      font-size: 0.86rem;
+      text-decoration: none;
+      cursor: pointer;
+    }
+
+    .video-action.primary {
+      background: linear-gradient(180deg, rgba(201,169,110,0.18), rgba(201,169,110,0.08));
+      border-color: var(--surface-line-strong);
+    }
+
+    .video-action:hover {
+      transform: translateY(-1px);
+      border-color: var(--gold);
+    }
+
+    .video-modal {
+      position: fixed;
+      inset: 0;
+      z-index: 60;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 1rem;
+      background: rgba(9, 7, 6, 0.84);
+      backdrop-filter: blur(10px);
+    }
+
+    .video-modal.is-open {
+      display: flex;
+    }
+
+    .video-modal-panel {
+      width: min(1080px, 100%);
+      border-radius: 1.6rem;
+      border: 1px solid var(--surface-line-strong);
+      background:
+        linear-gradient(180deg, rgba(201,169,110,0.08), transparent 65%),
+        var(--card-bg);
+      box-shadow: 0 30px 80px rgba(0,0,0,0.44);
+      overflow: hidden;
+    }
+
+    .video-modal-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      padding: 1rem 1.15rem;
+      border-bottom: 1px solid var(--surface-line);
+    }
+
+    .video-modal-title {
+      margin: 0;
+      font-size: 1.1rem;
+      color: var(--gold-light);
+    }
+
+    .video-modal-close {
+      width: 2.4rem;
+      height: 2.4rem;
+      border-radius: 50%;
+      border: 1px solid var(--surface-line);
+      background: var(--gold-wash-04);
+      color: var(--text-primary);
+      font-size: 1rem;
+      cursor: pointer;
+    }
+
+    .video-modal-body {
+      padding: 1rem;
+    }
+
+    .video-modal-frame {
+      position: relative;
+      aspect-ratio: 16 / 9;
+      border-radius: 1rem;
+      overflow: hidden;
+      border: 1px solid var(--surface-line);
+      background: #120d08;
+    }
+
+    .video-modal-frame iframe {
+      width: 100%;
+      height: 100%;
+      border: 0;
     }
 
     .tiktok-shell .card-core {
@@ -1577,6 +1701,11 @@
       .effort-item {
         grid-template-columns: 1fr;
         flex-direction: column;
+        align-items: start;
+      }
+
+      .video-card-actions,
+      .video-modal-head {
         align-items: start;
       }
     }
@@ -2528,12 +2657,49 @@
 
     function getDriveEmbedUrl(url) {
       const match = url.match(/\/d\/([^/]+)/);
-      return match ? "https://drive.google.com/file/d/" + match[1] + "/preview" : url;
+      return match ? "https://drive.google.com/file/d/" + match[1] + "/preview" : "";
     }
 
     function getTikTokEmbedUrl(url) {
       const match = url.match(/\/video\/(\d+)/);
-      return match ? "https://www.tiktok.com/embed/v3/" + match[1] : url;
+      return match ? "https://www.tiktok.com/embed/v2/" + match[1] : "";
+    }
+
+    function getVideoEmbedUrl(url) {
+      if (/drive\.google\.com/.test(url)) {
+        return getDriveEmbedUrl(url);
+      }
+      if (/tiktok\.com/.test(url)) {
+        return getTikTokEmbedUrl(url);
+      }
+      return "";
+    }
+
+    function buildVideoCard(title, sourceLabel, url, metaText) {
+      const openLabel = state.lang === "ar" ? "تشغيل الفيديو" : "Play Video";
+      const fallbackLabel = state.lang === "ar" ? "مشاهدة الفيديو" : "Watch Video";
+      return '' +
+        '<article class="card-shell media-card reveal">' +
+          '<div class="card-core">' +
+            '<button class="video-launch" type="button" data-video-title="' + escapeHtml(title) + '" data-video-url="' + escapeHtml(url) + '">' +
+              '<div class="embed-shell">' +
+                '<div class="embed-fallback">' +
+                  '<div>' +
+                    '<div class="video-meta">' + escapeHtml(sourceLabel) + '</div>' +
+                    '<div class="insight-title">' + escapeHtml(title) + '</div>' +
+                    (metaText ? '<div class="chart-note">' + escapeHtml(metaText) + '</div>' : '') +
+                  '</div>' +
+                '</div>' +
+                '<div class="play-overlay">▶</div>' +
+              '</div>' +
+            '</button>' +
+            '<h3 class="insight-title">' + escapeHtml(title) + '</h3>' +
+            '<div class="video-card-actions">' +
+              '<button class="video-action primary" type="button" data-video-title="' + escapeHtml(title) + '" data-video-url="' + escapeHtml(url) + '">' + escapeHtml(openLabel) + '</button>' +
+              '<a class="video-action mono" href="' + escapeHtml(url) + '" target="_blank" rel="noreferrer">' + escapeHtml(fallbackLabel) + '</a>' +
+            '</div>' +
+          '</div>' +
+        '</article>';
     }
 
     function buildExecutiveSummarySection() {
@@ -2821,22 +2987,7 @@
           buildSectionHeader(localize(section.title), "", "") +
           '<div class="video-grid">' +
             section.videos.map(function (video) {
-              return '' +
-                '<article class="card-shell media-card reveal">' +
-                  '<div class="card-core">' +
-                    '<div class="embed-shell">' +
-                      '<div class="embed-fallback">' +
-                        '<div>' +
-                          '<div class="video-meta">Google Drive</div>' +
-                          '<div class="insight-title">' + escapeHtml(localize(video.title)) + '</div>' +
-                        '</div>' +
-                      '</div>' +
-                      '<div class="play-overlay">▶</div>' +
-                    '</div>' +
-                    '<h3 class="insight-title">' + escapeHtml(localize(video.title)) + '</h3>' +
-                    '<a class="video-card-link mono" href="' + escapeHtml(video.url) + '" target="_blank" rel="noreferrer">' + escapeHtml(state.lang === "ar" ? "فتح الفيديو" : "Open Video") + '</a>' +
-                  '</div>' +
-                '</article>';
+              return buildVideoCard(localize(video.title), "Google Drive", video.url, "");
             }).join("") +
           '</div>' +
         '</section>';
@@ -2855,23 +3006,12 @@
               '</div>' +
               '<div class="tiktok-grid">' +
                 section.videos.map(function (url, index) {
-                  return '' +
-                    '<article class="card-shell tiktok-card reveal">' +
-                      '<div class="card-core">' +
-                        '<div class="embed-shell">' +
-                          '<div class="embed-fallback">' +
-                            '<div>' +
-                              '<div class="video-meta">TikTok</div>' +
-                              '<div class="insight-title">@mathwaa_</div>' +
-                              '<div class="chart-note">' + escapeHtml(state.lang === "ar" ? "فيديو عضوي للعقار" : "Organic property video") + '</div>' +
-                            '</div>' +
-                          '</div>' +
-                          '<div class="play-overlay">▶</div>' +
-                        '</div>' +
-                        '<div class="video-meta">@mathwaa_</div>' +
-                        '<a class="video-card-link mono" href="' + escapeHtml(url) + '" target="_blank" rel="noreferrer">' + escapeHtml(state.lang === "ar" ? "مشاهدة على TikTok" : "View on TikTok") + '</a>' +
-                      '</div>' +
-                    '</article>';
+                  return buildVideoCard(
+                    "@mathwaa_",
+                    "TikTok",
+                    url,
+                    state.lang === "ar" ? "فيديو عضوي للعقار" : "Organic property video"
+                  );
                 }).join("") +
               '</div>' +
             '</div>' +
@@ -3027,7 +3167,18 @@
               '</div>' +
             '</div>' +
           '</div>' +
-        '</footer>';
+        '</footer>' +
+        '<div class="video-modal" id="videoModal" aria-hidden="true">' +
+          '<div class="video-modal-panel">' +
+            '<div class="video-modal-head">' +
+              '<h3 class="video-modal-title" id="videoModalTitle">Video</h3>' +
+              '<button class="video-modal-close" id="videoModalClose" type="button" aria-label="Close">✕</button>' +
+            '</div>' +
+            '<div class="video-modal-body">' +
+              '<div class="video-modal-frame" id="videoModalFrame"></div>' +
+            '</div>' +
+          '</div>' +
+        '</div>';
     }
 
     function renderApp() {
@@ -3062,6 +3213,7 @@
       document.getElementById("app").innerHTML = html;
       initObservers();
       initCharts();
+      initVideoCards();
     }
 
     function destroyCharts() {
@@ -3439,10 +3591,96 @@
       });
     }
 
+    function closeVideoModal() {
+      const modal = document.getElementById("videoModal");
+      const frame = document.getElementById("videoModalFrame");
+      if (!modal || !frame) {
+        return;
+      }
+      modal.classList.remove("is-open");
+      modal.setAttribute("aria-hidden", "true");
+      frame.innerHTML = "";
+    }
+
+    function openVideoModal(title, url) {
+      const modal = document.getElementById("videoModal");
+      const frame = document.getElementById("videoModalFrame");
+      const modalTitle = document.getElementById("videoModalTitle");
+      const embedUrl = getVideoEmbedUrl(url);
+
+      if (!modal || !frame || !modalTitle) {
+        window.open(url, "_blank", "noopener,noreferrer");
+        return;
+      }
+
+      modalTitle.textContent = title;
+      frame.innerHTML = "";
+
+      if (!embedUrl) {
+        window.open(url, "_blank", "noopener,noreferrer");
+        return;
+      }
+
+      const iframe = document.createElement("iframe");
+      iframe.loading = "lazy";
+      iframe.allow = "autoplay; encrypted-media; picture-in-picture; fullscreen";
+      iframe.referrerPolicy = "strict-origin-when-cross-origin";
+      iframe.src = embedUrl;
+      iframe.title = title;
+      iframe.addEventListener("error", function () {
+        closeVideoModal();
+        window.open(url, "_blank", "noopener,noreferrer");
+      });
+
+      frame.appendChild(iframe);
+      modal.classList.add("is-open");
+      modal.setAttribute("aria-hidden", "false");
+    }
+
+    function initVideoCards() {
+      const app = document.getElementById("app");
+      const closeButton = document.getElementById("videoModalClose");
+      const modal = document.getElementById("videoModal");
+
+      if (app) {
+        app.querySelectorAll("[data-video-url]").forEach(function (node) {
+          node.addEventListener("click", function (event) {
+            if (node.tagName === "A") {
+              return;
+            }
+            event.preventDefault();
+            const title = node.getAttribute("data-video-title") || "Video";
+            const url = node.getAttribute("data-video-url");
+            if (url) {
+              openVideoModal(title, url);
+            }
+          });
+        });
+      }
+
+      if (closeButton) {
+        closeButton.addEventListener("click", closeVideoModal);
+      }
+
+      if (modal) {
+        modal.addEventListener("click", function (event) {
+          if (event.target === modal) {
+            closeVideoModal();
+          }
+        });
+      }
+    }
+
     document.getElementById("langToggle").addEventListener("click", function () {
       state.lang = state.lang === "ar" ? "en" : "ar";
       renderApp();
       window.scrollTo({ top: 0, behavior: "smooth" });
+    });
+
+    document.addEventListener("keydown", function (event) {
+      if (event.key === "Escape") {
+        closeVideoModal();
+      }
     });
 
     renderApp();
